@@ -8,5 +8,5 @@ Excited to share my thoughts here. It's my birthday today and I thought it would
 
 Hoping to share my experiences (mostly tech related) here.
 
-Cheers,
+Cheers,<br />
 Vikas
