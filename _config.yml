@@ -27,6 +27,7 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://vikassharma.me" # the base hostname & protocol for your site, e.g. http://example.com
 include: ["_pages"]
 permalink: /:title/
+disqus: vikassharma_me
 
 # Plugins
 plugins:
@@ -57,6 +58,7 @@ kramdown:
   syntax_highlighter_opts:
     block:
       line_numbers: true
+  auto_ids: true
 
 adsense: "disabled"
 adsense-data-ad-client: ""
