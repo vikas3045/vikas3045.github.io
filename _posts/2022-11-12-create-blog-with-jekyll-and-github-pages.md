@@ -10,8 +10,8 @@ featured: true
 If you always wanted to start your blog and don't know where to start. Well, just follow this quick guide and by the end of this article, you'll have your own working blog live on internet (sounds easy right, well it is actually easy. Let's get to it!). 
 
 In this guide, we'll go through the steps to bring our exciting blog to life (*yay!!*)
-1. [Step 1](#host-on-github-pages) - Create [GitHub](https://github.com/) account (*in case you already don't have one*) and create a public repository to host our blog's code. (We'll use [GitHub Pages](https://pages.github.com/) to host our blog for **Free**, exciting right!).
-2. [Step 2](#setup-and-configure-jekyll) - Set up [Jekyll](https://jekyllrb.com/) (a tool to generate static sites using markdown syntax) in your computer.
+1. [Step 1](#create-github-pages-repository) - Create [GitHub](https://github.com/) account (*in case you already don't have one*) and create a public repository to host our blog's code. (We'll use [GitHub Pages](https://pages.github.com/) to host our blog for **Free**, exciting right!).
+2. [Step 2](#setup-and-configure-jekyll) - Set up [Jekyll](https://jekyllrb.com/) (a tool to generate static sites using markdown syntax) in your computer. By end of this step, our blog should be up and running.
 3. [Step 3](#optional-configure-custom-domain) - (By the way, this is an optional step) If you have your own domain, we'll configure DNS settings to point it to our newly created blog.
 
 # Create `GitHub Pages` repository
