@@ -27,7 +27,7 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://vikassharma.me" # the base hostname & protocol for your site, e.g. http://example.com
 include: ["_pages"]
 permalink: /:title/
-disqus: vikassharma_me
+disqus: vikassharma-me
 
 # Plugins
 plugins:
