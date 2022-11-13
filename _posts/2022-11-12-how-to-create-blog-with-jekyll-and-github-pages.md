@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Create blog with Jekyll and Github pages"
+title:  "How to create blog with Jekyll and Github pages"
 author: Vikas Sharma
 date:   2022-11-12 22:46:00 +0530
 categories: [technical]
