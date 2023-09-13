@@ -4,4 +4,6 @@ title: About
 permalink: /about/
 ---
 
-I am a software engineer who likes to play guitar and occasionally go on road trips on my bike.
+I am a software engineer who is passionate about technology, likes to play guitar and occasionally goes on road trips on bike.
+
+<a href="/resume">Resume</a>
