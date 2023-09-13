@@ -4,4 +4,4 @@ title: Resume - Vikas Sharma
 permalink: /resume/
 ---
 
-<object data="../assets/docs/VikasSharma.pdf" width="1000" height="1000" type="application/pdf"></object>
+<object data="../resume.pdf" width="1000" height="1000" type="application/pdf"></object>
