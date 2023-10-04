@@ -50,11 +50,11 @@ In order to naively solve this question, we'll have to:
 - by end of the first loop, we'll have our answer recorded in the higher level variable `max_profit`.
 
 This approach has:
-- run time complexity of `O(n**2)` (as we have nested loops).
-- space complextity of `O(1)` (since our storage needs doesn't grow with input size i.e. size of the allocated variable `max_profit` is going to be same for any input size).
+- run time complexity of O(n<sup>2</sup>) (as we have nested loops).
+- space complextity of O(1) (since our storage needs doesn't grow with input size i.e. size of the allocated variable `max_profit` is going to be same for any input size).
 
 ### Further thoughts
-Can we do better than `O(n**2)`?
+Can we do better than O(n<sup>2</sup>)?
 
 - In our naive approach, for each potential buying price, we are eventually looking for the best possible selling price. The inefficiency in this approach is that it keeps looking for the selling price, `even if our current profit becomes 0 or -ve at certain point`. We know for sure that for such cases, our chosen buying price can't really be the solution to our problem as a better buying price exists at later stage due to which the profit becomes either 0 or -ve.
 - Let's consider an example `prices = [7,2,5,1,3,6,4]`. Assume that we are at `day 2 (price=2, index=1)`. Now, while looking for potential selling prices, at some point in time, we would consider `selling at day 4 (price=1, index=3)`. At that point the current profit would have been become -1. Which essentially means that there is no point in considering our current buying price (index=1) because either same or better buying price exists at later stage. So, we can safely ignore the intermediate buying prices and directly move to index=3.
@@ -71,8 +71,8 @@ Can we do better than `O(n**2)`?
         - Move to the current selling price being considered.
     - while we keep getting +ve result store the max of `max_profit` and `current profit` in the variable `max_profit`.
 - By end of the main loop we would have gotten our result in the variable `max_profit`. Time to just return it.
-- Time complexity: `O(n)` (since we only process all the elements at max 2 times).
-- Space complexity: `O(1)` (since our auxiliary storage `max_profit` doesn't grow with input size).
+- Time complexity: O(n) (since we only process all the elements at max 2 times).
+- Space complexity: O(1) (since our auxiliary storage `max_profit` doesn't grow with input size).
 
 
 ### Python code
