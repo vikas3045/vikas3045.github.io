@@ -16,7 +16,7 @@ You want to maximize your profit by choosing a single day to buy one stock and c
 Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
     </a>
     <p style="display:none;">    
-        In order to naively solve this question, we'll have to:
+        In order to solve this question in a brute-force way, we'll have to:
     </p>
 </p>
 
@@ -43,7 +43,7 @@ Constraints:
 ## Intuition
 
 ### First thoughts
-In order to naively solve this question, we'll have to:
+In order to solve this question in a brute-force way, we'll have to:
 - loop through all the elements and for each element (i.e. selecting the current element as our buying price):
     - we need to check against all the possible selling points (i.e. all the prices after our chosen buying price).
         - calculate if we are going to make any profit with the pair of chosen `buy price` and `sell price`. Record that in higher level variable (let's call it `max_profit` - only need to store the maximum obtained so far)
@@ -56,7 +56,7 @@ This approach has:
 ### Further thoughts
 Can we do better than O(n<sup>2</sup>)?
 
-- In our naive approach, for each potential buying price, we are eventually looking for the best possible selling price. The inefficiency in this approach is that it keeps looking for the selling price, `even if our current profit becomes 0 or -ve at certain point`. We know for sure that for such cases, our chosen buying price can't really be the solution to our problem as a better buying price exists at later stage due to which the profit becomes either 0 or -ve.
+- In our brute-force approach, for each potential buying price, we are eventually looking for the best possible selling price. The inefficiency in this approach is that it keeps looking for the selling price, `even if our current profit becomes 0 or -ve at certain point`. We know for sure that for such cases, our chosen buying price can't really be the solution to our problem as a better buying price exists at later stage due to which the profit becomes either 0 or -ve.
 - Let's consider an example `prices = [7,2,5,1,3,6,4]`. Assume that we are at `day 2 (price=2, index=1)`. Now, while looking for potential selling prices, at some point in time, we would consider `selling at day 4 (price=1, index=3)`. At that point the current profit would have been become -1. Which essentially means that there is no point in considering our current buying price (index=1) because either same or better buying price exists at later stage. So, we can safely ignore the intermediate buying prices and directly move to index=3.
 - From there on, we can keep looking for the optimal selling price:
     - till we run out of all potential prices.

@@ -11,7 +11,7 @@ featured: true
 <p>
     <a href="https://leetcode.com/problems/contains-duplicate/" target="_blank">Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.</a>
     <p style="display:none;">    
-        In order to naively solve this question, we'll have to:
+        In order to solve this question in a brute-force manner, we'll have to:
     </p>
 </p>
 
@@ -36,7 +36,7 @@ Constraints:
 ## Intuition
 
 ### First thoughts
-In order to naively solve this question, we'll have to:
+In order to solve this question in a brute-force manner, we'll have to:
 - loop through all the elements and for each element
     - we need to check against all the remaining elements if that element is present or not.
 
