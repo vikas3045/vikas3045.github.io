@@ -16,14 +16,31 @@ show_preview: false
 - [Props](#props)
 - [State](#state)
 - [Hooks](#hooks)
-    - [useState](#usestate)
-    - [useEffect](#useEffect)
-    - [useContext](#useContext)
-    - [useRef](#useRef)
-    - [Custom Hooks](#custom-hooks)
+    - [`useState`](#usestate)
+    - [`useEffect`](#useEffect)
+    - [`useContext`](#useContext)
+    - [`useRef`](#useRef)
+    - [`Custom Hooks`](#custom-hooks)
 - [Rendering](#rendering)
 - [Component Communication](#component-communication)
 - [Styling](#styling)
+- [Virtual DOM](#virtual-dom)
+- [React Component Lifecycle](#react-component-lifecycle)
+    - [Mounting Phase](#mounting-phase)
+        - [`constructor()`](#constructor)
+        - [`render()`](#render)
+        - [`componentDidMount()`](#componentdidmount)
+    - [Updating Phase](#updating-phase)
+        - [`static getDerivedStateFromProps()`](#static-getderivedstatefromprops)
+        - [`shouldComponentUpdate()`](#shouldcomponentupdate)
+        - [`render()`](#render-1)
+        - [`getSnapshotBeforeUpdate()`](#getsnapshotbeforeupdate)
+        - [`componentDidUpdate()`](#componentdidupdate)
+    - [Unmounting Phase](#unmounting-phase)
+        - [`componentWillUnmount()`](#componentwillunmount)
+    - [Error Handling](#error-handling)
+        - [`componentDidCatch()`](#componentdidcatch)
+    - [Note](#note)
 - [Code lab](#code-lab)
 - [Useful links](#useful-links)
 
@@ -345,6 +362,91 @@ function App() {
 
 - Inline styles: Use `style` attribute.
 - CSS Modules, Styled Components, or popular CSS frameworks.
+
+## Virtual DOM
+
+- The Virtual DOM is a lightweight in-memory representation of the actual DOM.
+It's used by React to optimize the process of updating the user interface.
+- When there's a change in the application's state, React creates a new Virtual DOM tree.
+- React then compares this new Virtual DOM tree with the previous one to identify the differences (diffing).
+- The differences are used to update the real DOM, but only the parts that changed.
+- This minimizes the number of updates and improves performance.
+
+## Reconciliation
+
+### Reconciliation Process:
+
+- React's process of updating the real DOM based on changes in the Virtual DOM is called reconciliation.
+- It ensures that the user interface is always in sync with the application's state.
+
+### Keys in Reconciliation:
+
+- Use unique keys for each element in lists to help React identify elements more efficiently.
+- Keys assist in minimizing unnecessary updates and re-renders.
+
+## React Component Lifecycle
+
+### Mounting Phase
+
+#### constructor()
+
+- Constructor is called when a component instance is created.
+- Initialize state and bind methods in the constructor.
+
+#### render()
+
+- Render method returns the JSX that represents the component's UI.
+- It's a pure function that should not modify the component's state.
+
+#### componentDidMount()
+
+- Invoked after the component is rendered.
+- Ideal for setting up side effects, such as data fetching or subscribing to events.
+
+### Updating Phase
+
+#### static getDerivedStateFromProps()
+
+- Rarely used, but if necessary, it's used to update state based on props.
+
+#### shouldComponentUpdate()
+
+- Determines whether the component should re-render.
+- Return `true` if you want to update, `false` to skip re-rendering.
+
+#### render()
+
+- Re-render the component with updated props or state.
+
+#### getSnapshotBeforeUpdate()
+
+- Allows you to capture some information before the component updates.
+- Use it with `componentDidUpdate` to handle interactions with the DOM.
+
+#### componentDidUpdate()
+
+- Invoked after the component updates and the changes are reflected in the DOM.
+- Ideal for performing side effects when props or state change.
+
+### Unmounting Phase
+
+#### componentWillUnmount()
+
+- Called before a component is removed from the DOM.
+- Perform cleanup tasks such as canceling timers or unsubscribing from data sources.
+
+### Error Handling
+
+#### componentDidCatch()
+
+- Captures errors in the child components during rendering.
+- Implement this method to gracefully handle errors and display fallback UI.
+
+### Note:
+
+- React has moved away from some lifecycle methods in favor of hooks like `useEffect`.
+- Focus on class component lifecycle for existing codebases and legacy support.
+
 
 ## Code lab
 - Created this very simple react app to revise the basics.
