@@ -351,8 +351,5 @@ function App() {
 - <a href="https://github.com/vikas3045/task-manager" target="_blank">https://github.com/vikas3045/task-manager</a>
 
 ## Useful links
-- <a href="https://react.dev/" target="_blank">https://react.dev/</a>
+- <a href="https://react.dev/reference/react/" target="_blank">https://react.dev/reference/react/</a>
 - <a href="https://create-react-app.dev/" target="_blank">https://create-react-app.dev/</a>
-
-
-
