@@ -25,7 +25,9 @@
                 </div>
                 {% endif %}
             </h2>
+            {% if post.show_preview %}
             <h4 class="card-text">{{ post.excerpt | strip_html | truncatewords:30 }}</h4>
+            {% endif %}
         </div>
         <div class="card-footer bg-white">
             <div class="wrapfooter">

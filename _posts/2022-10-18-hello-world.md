@@ -7,6 +7,7 @@ categories: [personal, first-post]
 tags: [green]
 image: assets/images/hello-world.jpg
 featured: false
+show_preview: true
 ---
 Excited to share my thoughts here. It's my birthday today and I thought it would be a good time to start something new and exciting.
 

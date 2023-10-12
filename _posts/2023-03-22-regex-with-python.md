@@ -6,6 +6,7 @@ date:   2023-03-22 22:17:00 +0530
 categories: [technical]
 image: assets/images/coding-laptop.jpg
 featured: true
+show_preview: true
 ---
 `Regular expressions`, often abbreviated as `regex`, are a powerful tool used to match patterns in strings. They are widely used in various programming languages, including `Python`, for various purposes such as `searching for specific characters`, `validating inputs`, and `parsing data`. In this blog post, we will dive into the world of regex in Python and understand how to use them to accomplish a range of tasks.
 

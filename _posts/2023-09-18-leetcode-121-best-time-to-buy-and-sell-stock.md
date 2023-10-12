@@ -5,6 +5,7 @@ author: Vikas Sharma
 date:   2023-09-18 13:01:00 +0530
 categories: [technical, leetcode, blind-75, sliding-window]
 featured: true
+show_preview: false
 ---
 
 <p>
@@ -15,9 +16,6 @@ You want to maximize your profit by choosing a single day to buy one stock and c
 
 Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
     </a>
-    <p style="display:none;">    
-        In order to solve this question in a brute-force way, we'll have to:
-    </p>
 </p>
 
 ```

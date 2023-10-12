@@ -6,13 +6,11 @@ date:   2023-09-16 15:53:00 +0530
 categories: [technical, leetcode, blind-75]
 # image: assets/images/coding-laptop.jpg
 featured: true
+show_preview: false
 ---
 
 <p>
     <a href="https://leetcode.com/problems/contains-duplicate/" target="_blank">Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.</a>
-    <p style="display:none;">    
-        In order to solve this question in a brute-force manner, we'll have to:
-    </p>
 </p>
 
 ```

@@ -6,6 +6,7 @@ date:   2022-11-12 22:46:00 +0530
 categories: [technical]
 image: assets/images/coding-laptop.jpg
 featured: true
+show_preview: true
 ---
 If you always wanted to start your blog and don't know where to start. Well, just follow this quick guide and by the end of this article, you'll have your own working blog live on internet (sounds easy right, well it is actually easy. Let's get to it!). 
 
