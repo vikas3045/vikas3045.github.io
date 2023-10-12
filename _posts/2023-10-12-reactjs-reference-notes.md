@@ -25,6 +25,7 @@ show_preview: false
 - [Component Communication](#component-communication)
 - [Styling](#styling)
 - [Code lab](#code-lab)
+- [Useful links](#useful-links)
 
 ## Introduction
 
