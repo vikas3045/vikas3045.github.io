@@ -71,7 +71,6 @@ class CounterComponent extends React.Component {
 		console.log("Component will unmount");
 	}
 
-	// TODO: What is the difference between following two types of syntaxes
 	handleClick() {
 		this.setState({
 			count: this.state.count + 1,
