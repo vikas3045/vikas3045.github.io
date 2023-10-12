@@ -39,7 +39,7 @@ ReactJs is an open-source javascript library for building User interfaces. It's 
 
 ### Functional Components
 
-Simple javascript functions that return React elements and are also the recommended way of writing Components. They don't have state or lifecycle methods, but they can use hooks to add state and side effects.
+Simple javascript functions that return React elements (also the recommended way of writing Components). They don't have state or lifecycle methods, but they can use hooks to add state and side effects.
 
 ```jsx
 const HelloComponent = (props) => {
