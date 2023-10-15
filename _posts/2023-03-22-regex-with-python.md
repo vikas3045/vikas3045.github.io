@@ -7,6 +7,7 @@ categories: [technical]
 image: assets/images/coding-laptop.jpg
 featured: true
 show_preview: true
+toc: true
 ---
 `Regular expressions`, often abbreviated as `regex`, are a powerful tool used to match patterns in strings. They are widely used in various programming languages, including `Python`, for various purposes such as `searching for specific characters`, `validating inputs`, and `parsing data`. In this blog post, we will dive into the world of regex in Python and understand how to use them to accomplish a range of tasks.
 
@@ -38,7 +39,7 @@ The syntax for regular expressions in Python is similar to that used in other pr
 
 Let's see some examples of how regular expressions can be used in Python:
 
-1. Searching for a Pattern:
+- Searching for a Pattern:
 
 ```python
 import re
@@ -51,7 +52,7 @@ print("Email:", match.group())
 
 In this example, we are using the `search()` function to find an email address in a string. The pattern used in this example is a commonly used pattern for matching email addresses.
 
-2. Replacing a Pattern:
+- Replacing a Pattern:
 
 ```python
 import re
@@ -63,7 +64,7 @@ new_string = re.sub(pattern, replacement, string)
 print(new_string)
 ```
 
-3. Extracting All Matches:
+- Extracting All Matches:
 
 ```python
 import re
@@ -76,7 +77,7 @@ print("Matches:", matches)
 
 In this example, we are using the `findall()` function to extract all occurrences of the word "black" in a string. The `findall()` function returns a list of all non-overlapping matches in the string.
 
-4. Splitting a String:
+- Splitting a String:
 
 ```python
 import re
@@ -89,7 +90,7 @@ print("Words:", words)
 
 In this example, we are using the `split()` function to split a string into a list of words based on the pattern "and". The `split()` function returns a list of substrings that were separated by the specified pattern.
 
-5. Replacing Multiple Occurrences:
+- Replacing Multiple Occurrences:
 
 ```python
 import re
