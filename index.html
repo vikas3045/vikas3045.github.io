@@ -3,44 +3,63 @@ layout: default
 title: Home
 ---
 
-{% if page.url == "/" %}
+<!-- <section>
+    <div style="height: 500px;" class="d-flex">
+        <div class="container position-relative px-4 px-lg-5">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-12">
+                    <div class="text-center">
+                        <h1>Hi, I am Vikas Sharma</h1>
+                        <span class="subheading">Software Engineer</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</section> -->
+<section>
+    <div style="height: 500px;">
+        <div class="container h-100">
+            <div class="d-flex align-items-center justify-content-center h-100">
+              <div class="d-flex flex-column">
+                <h1 class="text align-self-center">Hi, I am Vikas Sharma</h1>
+                <span class="text align-self-center subheading">Software Engineer</span>
+                <p class="text align-self-center mt-5">
+                    Python | C# | JavaScript | Node | React | Angular | MySQL | Postgres | CI/CD | Docker | AWS
+                </p>
+                <div class="text align-self-center">
+                    <span class="ml-2 mx-2">
+                        <a href="https://linkedin.com/in/sharmavikas10/" target="_blank"><i class="fa-brands fa-linkedin fa-xl"></i></a>
+                    </span>
+                    <span class="ml-1 mx-1">
+                        <a href="https://github.com/vikas3045" target="_blank"><i class="fa-brands fa-github fa-xl"></i></a>
+                    </span>
+                    <span class="ml-2 mx-2">
+                        <a href="https://vikassharma.me/resume/"><i class="fa-solid fa-file-pdf fa-xl"></i></a>
+                    </span>
+                    
+                </div>
+                
+              </div>
+            </div>
+          </div>
+    </div>
+  </section>
 
 <!-- Featured
 ================================================== -->
-<section class="featured-posts">
-    <div class="section-title">
-        <h2><span>Featured</span></h2>
-    </div>
-    <div class="row">
-
-    {% for post in site.posts %}
-
-        {% if post.featured == true %}
-
-            {% include featuredbox.html %}
-
-        {% endif %}
-
-    {% endfor %}
-
-    </div>
-</section>
-
-{% endif %}
 
 <!-- Posts Index
 ================================================== -->
 <section class="recent-posts">
-
     <div class="section-title">
-
-        <h2><span>All Stories</span></h2>
-
+        <h2><span>Latest</span></h2>
     </div>
 
     <div class="row listrecent">
 
-        {% for post in paginator.posts %}
+        {% for post in site.posts %}
 
         {% include postbox.html %}
 
@@ -53,9 +72,8 @@ title: Home
 <!-- Pagination
 ================================================== -->
 <div class="bottompagination">
-<div class="pointerup"><i class="fa fa-caret-up"></i></div>
-<span class="navigation" role="navigation">
-    {% include pagination.html %}
-</span>
+    <div class="pointerup"><i class="fa fa-caret-up"></i></div>
+    <span class="navigation" role="navigation">
+        {% include pagination.html %}
+    </span>
 </div>
-
