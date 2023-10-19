@@ -39,7 +39,6 @@ title: Home
                     <span class="ml-2 mx-2">
                         <a href="https://vikassharma.me/resume/"><i class="fa-solid fa-file-pdf fa-xl"></i></a>
                     </span>
-                    
                 </div>
                 
               </div>
@@ -61,8 +60,11 @@ title: Home
     <div class="row listrecent">
 
         {% for post in site.posts %}
+            {% if post.dont_list_on_dashboard == true %}
+                {% continue %}
+            {% endif %}
 
-        {% include postbox.html %}
+            {% include postbox.html %}
 
         {% endfor %}
 
