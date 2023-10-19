@@ -34,7 +34,10 @@ permalink: /blog
     </div>
     <div class="row listrecent">
         {% for post in site.posts %}
-        {% include postbox.html %}
+            {% if post.dont_list_on_dashboard == true %}
+                    {% continue %}
+                {% endif %}
+            {% include postbox.html %}
         {% endfor %}
     </div>
 </section>
