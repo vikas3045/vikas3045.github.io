@@ -6,8 +6,14 @@ date:   2023-10-25 13:12:00 +0530
 image: assets/images/sliding-window-banner.jpeg
 categories: [technical]
 featured: true
-show_preview: false
 ---
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@i_vikassharma">
+<meta name="twitter:creator" content="@i_vikassharma">
+<meta name="twitter:title" content="How to solve Sliding Window Problems?">
+<meta name="twitter:description" content="A comprehensive guide to solving problems with the Sliding Window Technique. Learn the fundamentals and real-world applications. #SlidingWindow #ProblemSolving">
+<meta name="twitter:image" content="https://vikassharma.me/assets/images/sliding-window-banner.jpeg">
 
 ## Table of Contents
 
