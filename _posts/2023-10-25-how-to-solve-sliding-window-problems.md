@@ -142,19 +142,21 @@ return maxProfit
 ```
 ## Types
 ### Fixed size window
-- https://leetcode.com/problems/sliding-window-maximum/description/
+
+**Example(s)**:
+- <a href="https://leetcode.com/problems/sliding-window-maximum/description/" target="_blank">Sliding window maximum</a>
 
 ### Variable size window
 #### 1. Left catches up with right
 
-**Examples**:
+**Example(s)**:
 - <a href="https://vikassharma.me/leetcode-121-best-time-to-buy-and-sell-stock/" target="_blank">Best time to buy and sell stock</a>
 - <a href="https://leetcode.com/problems/longest-repeating-character-replacement" target="_blank">Longest repeating character replacement</a>
 - <a href="https://leetcode.com/problems/permutation-in-string/" target="_blank">Permutation in string</a>
 
 #### 2. Multiple possible lefts
 
-**Examples**:
+**Example(s)**:
 - <a href="https://leetcode.com/problems/longest-substring-without-repeating-characters/" target="_blank">Longest substring without repeating characters</a>
 - <a href="https://leetcode.com/problems/minimum-window-substring/description/" target="_blank">Minimum window substring</a>
 
