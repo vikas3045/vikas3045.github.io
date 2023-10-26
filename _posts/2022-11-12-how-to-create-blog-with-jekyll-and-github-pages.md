@@ -4,7 +4,7 @@ title:  "How to create blog with Jekyll and Github pages"
 author: Vikas Sharma
 date:   2022-11-12 22:46:00 +0530
 categories: [technical]
-image: assets/images/coding-laptop.jpg
+image: assets/images/jekyll-github.jpeg
 featured: true
 show_preview: true
 ---
