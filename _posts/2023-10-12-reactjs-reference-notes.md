@@ -3,10 +3,18 @@ layout: post
 title:  "ReactJs reference notes"
 author: Vikas Sharma
 date:   2023-10-12 12:35:00 +0530
+image: assets/images/react-reference-notes.jpeg
 categories: [technical, frontend]
 featured: true
 show_preview: false
 ---
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@i_vikassharma">
+<meta name="twitter:creator" content="@i_vikassharma">
+<meta name="twitter:title" content="ReactJs reference notes">
+<meta name="twitter:description" content="React reference notes for quick revision #react #frontend">
+<meta name="twitter:image" content="https://vikassharma.me/assets/images/react-reference-notes.jpeg">
 
 - [Introduction](#introduction)
 - [Components](#components)

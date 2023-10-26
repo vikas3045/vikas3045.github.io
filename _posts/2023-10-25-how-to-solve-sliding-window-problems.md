@@ -6,6 +6,7 @@ date:   2023-10-25 13:12:00 +0530
 image: assets/images/sliding-window-banner.jpeg
 categories: [technical]
 featured: true
+show_preview: false
 ---
 
 <meta name="twitter:card" content="summary_large_image">
