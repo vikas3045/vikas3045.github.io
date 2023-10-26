@@ -4,7 +4,7 @@ title:  "217. Contains Duplicate"
 author: Vikas Sharma
 date:   2023-09-16 15:53:00 +0530
 categories: [technical, leetcode, blind-75]
-# image: assets/images/coding-laptop.jpg
+image: assets/images/l-contains-duplicate.jpeg
 featured: true
 show_preview: false
 ---

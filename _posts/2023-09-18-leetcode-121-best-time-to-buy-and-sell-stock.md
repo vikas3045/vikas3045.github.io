@@ -3,10 +3,18 @@ layout: post
 title:  "121. Best Time to Buy and Sell Stock"
 author: Vikas Sharma
 date:   2023-09-18 13:01:00 +0530
+image: assets/images/l-buy-and-sell.jpeg
 categories: [technical, leetcode, blind-75, sliding-window]
 featured: true
 show_preview: false
 ---
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@i_vikassharma">
+<meta name="twitter:creator" content="@i_vikassharma">
+<meta name="twitter:title" content="121. Best Time to Buy and Sell Stock">
+<meta name="twitter:description" content="How to solve leetcode problem no. 121 best-time-to-buy-and-sell-stock">
+<meta name="twitter:image" content="https://vikassharma.me/assets/images/l-buy-and-sell.jpeg">
 
 <p>
     <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/" target="_blank">
