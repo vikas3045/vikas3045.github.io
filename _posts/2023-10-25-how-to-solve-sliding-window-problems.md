@@ -47,8 +47,8 @@ This blog post aims to provide clarity about these kind of questions and also ai
 There are a few key things to look for when identifying problems where the sliding window technique can be applied:
 
 1. The problem involves a **sequence of data points** such as arrays, list of elements or string.
-2. Problem is specifically asking about finding some subrange in that array/string, like a longest, shortest or target value.
-3. There is a constraint on the size of the window. Sometimes, its simple as being clearly mentioned as "k-sized window" or little more abstract in nature like "longest substring without repeating characters".
+2. Problem is specifically asking about **finding some subrange** in that array/string, like a longest, shortest or target value.
+3. There is a **constraint on the size of the window**. Sometimes, it's as simple as being clearly mentioned as "k-sized window" or little more abstract in nature like "longest substring without repeating characters".
 
 ## General mental model
 
@@ -63,7 +63,7 @@ Let's try to formalise these fundamental steps as follows:
 As the name suggests, in this step we are just trying to expand the window being observed at the right end. While there are few different ways to do that, let's stick with good old `for` loop at the moment. We'll call our iterator as `right` to mimic the right end of our conceptual window (Sliding window: well it slides on the ends, so nothing fancy)
 
 ### 2. Shrink
-As we discussed earlier, there would be some kind of constraint on the size of the window. This constraint can be simply a constraint of let's say "k-sized window" or little more abstract in nature like "longest substring without repeating characters". Essentially this constraint/condition will help us to evaluate the validity of the window being observed.
+As we discussed earlier, there would be some kind of constraint on the size of the window. This constraint can simply be a constraint of let's say "k-sized window" or little more abstract in nature like "longest substring without repeating characters". Essentially this constraint/condition will help us to evaluate the validity of the window being observed.
 This particular step just refers to the action of shrinking the window from its left end towards right so that we can maintain the valid window (that satisfies the constraint on size)
 
 ### 3. Record the candidate result
@@ -80,12 +80,13 @@ def fn(arr):
 	    # 1. Expand
         # do logic here to add arr[right] to curr_win
 
-		# 2. Shrink
+		  # 2. Shrink
         while WINDOW_CONDITION_BROKEN:
-            # remove arr[left] from curr_win
+            # keep removing arr[left] from curr_win 
+            # until it is a valid window again
             left += 1
 
-		# 3. Record the candidate result
+		  # 3. Record the candidate result
         # update result
     
     return result
@@ -95,7 +96,7 @@ Let's quickly solve a simple problem using sliding window pattern to reinforce o
 
 ### Problem statement
 
-You are given an array `prices` where `prices[i]` is the price of a given stock on the `ith` day.
+You are given an array `prices` where `prices[i]` is the price of a given stock on the `i-th` day.
 
 You want to maximize your profit by choosing a **single day** to buy one stock and choosing a **different day in the future** to sell that stock.
 
@@ -103,7 +104,7 @@ Return _the maximum profit you can achieve from this transaction_. If you canno
 
 **Example 1:**
 
-**Input:** prices = [7,1,5,3,6,4]
+**Input:** prices = [7,1,5,3,6,4]<br/>
 **Output:** 5
 
 **Explanation:** Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
@@ -111,15 +112,15 @@ Note that buying on day 2 and selling on day 1 is not allowed because you must b
 
 **Example 2:**
 
-**Input:** prices = [7,6,4,3,1]
+**Input:** prices = [7,6,4,3,1]<br/>
 **Output:** 0
 
 **Explanation:** In this case, no transactions are done and the max profit = 0.
 
 ### Explanation and Solution
 
-- We fix a buy price, in this case index=0.
-- We start with start expanding with the next possible selling price.
+- We fix a buy price, in this case `index=0`.
+- We start with `index=0` and start expanding with the next possible selling price.
 - For each potential selling price, we check if this window is still profitable i.e. `prices[sell] >= prices[buy]`. If that's not the case, then it means that we can do better in terms of selecting our buy price.
 - Therefore, we move our buy price pointer to sell price directly (as we would have processed all intermediate cases already).
 - This problem is of category <a href="#1-left-catches-up-with-right">Left catches up with right</a> explained later in this post.
@@ -129,14 +130,15 @@ Note that buying on day 2 and selling on day 1 is not allowed because you must b
 def maxProfit(prices: List[int]) -> int:
 	buy, maxProfit = 0, 0
 	for sell in range(len(prices)):
-		# expand
+		# Expand
 		# no action needed - we are just expanding our observed window
+    # by one potential selling price at a time
 		
-		# shrink
+		# Shrink
 		if prices[sell] < prices[buy]:
 			buy = sell
 		
-		# record candidate result and compare it against best we got so far
+		# Record candidate result and compare it against best we got so far
 		maxProfit = max(maxProfit, prices[sell]-prices[buy])
 
 return maxProfit
