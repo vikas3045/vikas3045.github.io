@@ -16,7 +16,7 @@ Two critical classes in this module are:
 1. **Request Class**
 The Request class encapsulates all the data needed to prepare and send an HTTP request.
 
-## Key Attributes:
+### Key Attributes:
 
 - method: The HTTP method (e.g., 'GET', 'POST').
 - url: The URL to which the request is made.
