@@ -15,6 +15,7 @@ The use of `*` in front of a collection will unpack it. This interesting behavio
 For example, let's consider a function that concatenates the words passed into a complete sentence separated by space.
 
 1. First case, where you want to support two words
+
 ```python
 def change_words_to_sentence(word_1, word_2):
     return f'{word_1} {word_2}'
@@ -24,6 +25,7 @@ def change_words_to_sentence(word_1, word_2):
 ```
 
 2. Now let's say you to support more than two words,
+
 ```python
 def change_words_to_sentence(words):
     return ' '.join(words)
@@ -34,6 +36,7 @@ def change_words_to_sentence(words):
 ```
 
 3. One another possible way could be,
+
 ```python
 def change_words_to_sentence(*args):
     return ' '.join(args)
