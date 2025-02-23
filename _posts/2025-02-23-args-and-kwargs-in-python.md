@@ -7,7 +7,6 @@ categories: [sticky-notes]
 show_preview: false  
 ---
 
-# Overview
 `*args` and `**kwargs` allows us to pass *multiple arguments* and *keyword arguments* to a function.
 
 ## args
