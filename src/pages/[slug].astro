@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import PostLayout from '../components/PostLayout.astro';
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection('blog');
+  return blogEntries.map(entry => ({
+    params: { slug: entry.slug.replace(/^\d{4}-\d{2}-\d{2}-/, '') },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+const heroImage = entry.data.image 
+  ? (entry.data.image.startsWith('assets/images/') 
+      ? `/${entry.data.image.substring('assets/'.length)}` 
+      : entry.data.image) 
+  : undefined;
+
+function cleanMarkdown(text: string) {
+  return text
+    .replace(/^#+\s+/gm, '') // headings
+    .replace(/(\*\*|__)(.*?)\1/g, '$2') // bold
+    .replace(/(\*|_)(.*?)\1/g, '$2') // italic
+    .replace(/`([^`]+)`/g, '$1') // inline code
+    .replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1') // links
+    .replace(/\n+/g, ' ') // newlines
+    .trim()
+    .substring(0, 160) + '...';
+}
+
+const description = entry.data.description || cleanMarkdown(entry.body);
+---
+<Layout title={entry.data.title} description={description} type="article" publishDate={entry.data.date} image={heroImage}>
+  <PostLayout 
+    title={entry.data.title} 
+    date={entry.data.date} 
+    image={heroImage}
+    categories={entry.data.categories}
+  >
+    <Content />
+  </PostLayout>
+</Layout>

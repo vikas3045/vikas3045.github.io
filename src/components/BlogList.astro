@@ -1,0 +1,19 @@
+---
+// src/components/BlogList.astro
+import FormattedDate from './FormattedDate.astro';
+const { posts } = Astro.props;
+---
+<section>
+  <h2>Recent Posts</h2>
+  <ul class="item-groups">
+    {posts.map((entry) => (
+      <li>
+        <FormattedDate date={entry.data.date} />
+        <a href={`/${entry.slug.replace(/^\d{4}-\d{2}-\d{2}-/, '')}`}>
+          <span class="title">{entry.data.title}</span>
+        </a>
+        {entry.data.description && <p>{entry.data.description}</p>}
+      </li>
+    ))}
+  </ul>
+</section>

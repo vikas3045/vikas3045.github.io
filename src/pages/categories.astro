@@ -1,0 +1,68 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+
+// 1. Fetch all posts
+const allPosts = await getCollection('blog');
+
+// 2. Group posts by category
+const postsByCategory = new Map<string, any[]>();
+
+allPosts.forEach(post => {
+  if (post.data.categories && post.data.categories.length > 0) {
+    post.data.categories.forEach(category => {
+      if (!postsByCategory.has(category)) {
+        postsByCategory.set(category, []);
+      }
+      postsByCategory.get(category)?.push(post);
+    });
+  }
+});
+
+// Sort categories alphabetically for the index
+const sortedCategories = Array.from(postsByCategory.keys()).sort((a, b) => a.localeCompare(b));
+---
+<Layout title="Categories">
+  <section>
+    <h1>Categories</h1>
+
+    <!-- Category Index -->
+    <div class="item-index">
+      <ul>
+        {sortedCategories.map(category => (
+          <li>
+            <a href={`#${category}`}>{category}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <hr />
+
+    <!-- Grouped Posts -->
+    <div class="item-groups">
+      {sortedCategories.map(category => {
+        const posts = postsByCategory.get(category) || [];
+        return (
+          <div class="category-group">
+            <h2 id={category}>{category}</h2>
+            <ul>
+              {posts.map(post => {
+                const slug = post.slug.replace(/^\d{4}-\d{2}-\d{2}-/, '');
+                return (
+                  <li>
+                    <FormattedDate date={post.data.date} />
+                    <a href={`/${slug}`}>
+                        <span class="title">{post.data.title}</span>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        );
+      })}
+    </div>
+  </section>
+</Layout>

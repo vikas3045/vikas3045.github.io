@@ -1,0 +1,116 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PostLayout from '../components/PostLayout.astro';
+---
+
+<Layout title="Draft Preview">
+  <h1 style="margin-top:0;">Draft Preview</h1>
+  
+  <div class="preview-container">
+    <div class="pane">
+      <textarea id="markdown-input" placeholder="---
+title: My New Post
+date: 2025-12-08  
+---
+
+# Start writing markdown..."></textarea>
+    </div>
+    
+    <div class="pane">
+      <div id="preview-wrapper">
+        <PostLayout title="Draft Title" date={new Date()}>
+            <div id="preview-content"></div>
+        </PostLayout>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <script>
+    // 1. Simple Frontmatter Parser
+    function parseFrontmatter(text): { data: Record<string, string>; content: string } {
+      const pattern = /^---\s*[\r\n]+([\s\S]*?)[\r\n]+---([\s\S]*)$/;
+      const match = text.match(pattern);
+
+      if (!match) return { data: {}, content: text };
+
+      const frontmatterRaw = match[1];
+      const content = match[2];
+      const data: Record<string, string> = {};
+
+      frontmatterRaw.split('\n').forEach(line => {
+        const parts = line.split(':');
+        if (parts.length >= 2) {
+          const key = parts[0].trim();
+          let value = parts.slice(1).join(':').trim();
+          value = value.replace(/^['"](.*)['"]$/, '$1');
+          data[key] = value;
+        }
+      });
+
+      return { data, content };
+    }
+
+    // 2. Setup Editor
+    function setupEditor() {
+      const markdownInput = document.getElementById('markdown-input') as HTMLTextAreaElement;
+      const previewWrapper = document.getElementById('preview-wrapper');
+      
+      // Target the elements rendered by PostLayout using stable selectors
+      const titleEl = previewWrapper.querySelector('h1');
+      const dateEl = previewWrapper.querySelector('[data-preview-id="date"]');
+      const contentEl = document.getElementById('preview-content');
+      
+      const defaultTitle = "Draft Preview";
+
+      function render() {
+        const rawText = markdownInput.value;
+        const { data, content } = parseFrontmatter(rawText);
+        
+        // Update Title (DOM Manipulation)
+        if (titleEl) {
+            titleEl.textContent = data.title || defaultTitle;
+            document.title = data.title || defaultTitle;
+        }
+
+        // Update Date (DOM Manipulation)
+        if (dateEl && data.date) {
+            const dateObj = new Date(data.date);
+            if (!isNaN(dateObj.getTime())) {
+                const day = String(dateObj.getDate()).padStart(2, '0');
+                const month = dateObj.toLocaleDateString('en-US', { month: 'short' });
+                const year = dateObj.getFullYear();
+                const formattedDate = `${day} ${month}, ${year}`;
+                dateEl.textContent = `Published on: ${formattedDate}`;
+                // Ensure the parent <p> tag is visible
+                if (dateEl.parentElement) dateEl.parentElement.style.display = 'block';
+            } else {
+                // Hide if date is invalid
+                 if (dateEl.parentElement) dateEl.parentElement.style.display = 'none';
+            }
+        } else if (dateEl && !data.date) {
+            // Hide date if missing in frontmatter
+            if (dateEl.parentElement) dateEl.parentElement.style.display = 'none';
+        }
+
+        // Update Content
+        try {
+            // @ts-ignore
+            contentEl.innerHTML = marked.parse(content);
+        } catch (e) {
+            contentEl.innerHTML = '<p style="color:red">Error parsing markdown</p>';
+        }
+      }
+
+      markdownInput.addEventListener('input', render);
+      render(); // Initial pass
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', setupEditor);
+    } else {
+      setupEditor();
+    }
+  </script>
+</Layout>

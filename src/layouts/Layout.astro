@@ -1,0 +1,28 @@
+---
+import '../styles/global.css';
+import BaseHead from '../components/BaseHead.astro';
+import Body from '../components/Body.astro';
+
+const { 
+    title,
+    description,
+    image,
+    type,
+    publishDate,
+} = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead 
+			title={title}
+			description={description}
+			image={image}
+            type={type}
+            publishDate={publishDate}
+		/>
+	</head>
+	<Body>
+		<slot />
+	</Body>
+</html>

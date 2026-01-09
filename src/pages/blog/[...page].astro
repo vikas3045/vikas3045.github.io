@@ -1,0 +1,42 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import BlogList from '../../components/BlogList.astro';
+
+export async function getStaticPaths({ paginate }) {
+  const blogEntries = (await getCollection('blog'))
+    .filter(entry => !entry.data.dont_list_on_dashboard)
+    .sort(
+      (a, b) => b.data.date.getTime() - a.data.date.getTime()
+    );
+  return paginate(blogEntries, { pageSize: 20 });
+}
+
+const { page } = Astro.props;
+---
+
+<Layout title="Blog">
+  <BlogList posts={page.data} />
+  
+  <div class="pagination">
+    {page.url.prev ? <a href={page.url.prev}>&laquo; Previous</a> : <span></span>}
+    {page.url.next ? <a href={page.url.next}>Next &raquo;</a> : <span></span>}
+  </div>
+</Layout>
+
+<style>
+  .pagination {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--dim);
+  }
+  .pagination a {
+    text-decoration: none;
+    color: var(--link-color);
+  }
+  .pagination a:hover {
+    text-decoration: underline;
+  }
+</style>

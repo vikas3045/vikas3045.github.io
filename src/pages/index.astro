@@ -1,0 +1,28 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+import BlogList from '../components/BlogList.astro';
+
+const blogEntries = (await getCollection('blog'))
+  .filter(entry => !entry.data.dont_list_on_dashboard)
+  .sort(
+    (a, b) => b.data.date.getTime() - a.data.date.getTime()
+  );
+---
+
+<Layout 
+  title="Home"
+  description="vikassharma.me"
+>
+  <section>
+    <p>
+      Hi, I am Vikas Sharma, a passionate software engineer and tech enthusiast.
+    </p>
+    <p>
+      Welcome to my personal blog!
+    </p>
+  </section>
+
+  <BlogList posts={blogEntries} />
+</Layout>

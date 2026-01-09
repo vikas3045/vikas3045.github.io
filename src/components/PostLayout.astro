@@ -1,0 +1,36 @@
+---
+import CategoryLinks from './CategoryLinks.astro';
+import FormattedDate from './FormattedDate.astro';
+
+interface Props {
+    title: string;
+    date?: Date;
+    image?: string; // Optional image prop
+    categories?: string[]; // Optional categories prop
+}
+
+const { title, date, image, categories } = Astro.props;
+
+// Function to convert Jekyll image path to Astro public path
+const getPublicImagePath = (imgPath: string) => {
+  if (imgPath.startsWith('assets/images/')) {
+    return `/${imgPath.substring('assets/'.length)}`; // Remove 'assets/'
+  }
+  return imgPath; // Return as is if not matching pattern
+};
+---
+<article>
+    {image && (
+        <img
+            src={getPublicImagePath(image)}
+            alt={title}
+            class="header-image"
+            loading="lazy"
+        />
+    )}
+    <h1>{title}</h1>
+    {date && <FormattedDate date={date} />}
+    <CategoryLinks categories={categories} />
+    <hr>
+    <slot />
+</article>

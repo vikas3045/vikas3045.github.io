@@ -1,0 +1,291 @@
+/* 
+This global.css takes the styling from Bear Blog and adapts it for use in Astro.
+Source: https: //github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
+*/
+
+:root {
+  --width: 800px;
+  --font-main: Verdana, sans-serif;
+  --font-secondary: Verdana, sans-serif;
+  --font-scale: 1em;
+  --background-color: #fff;
+  --heading-color: #222;
+  --text-color: #444;
+  --link-color: #3273dc;
+  --visited-color: #8b6fcb;
+  --code-background-color: #f2f2f2;
+  --code-color: #222;
+  --blockquote-color: #222;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #01242e;
+    --heading-color: #eee;
+    --text-color: #ddd;
+    --link-color: #8cc2dd;
+    --visited-color: #8b6fcb;
+  }
+}
+
+body.dark-mode {
+  --background-color: #01242e;
+  --heading-color: #eee;
+  --text-color: #ddd;
+  --link-color: #8cc2dd;
+  --visited-color: #8b6fcb;
+  --code-background-color: #0d1117;
+  --code-color: #ddd;
+  --blockquote-color: #ccc;
+}
+
+body {
+  font-family: var(--font-secondary);
+  font-size: var(--font-scale);
+  margin: auto;
+  padding: 20px;
+  max-width: var(--width);
+  text-align: left;
+  background-color: var(--background-color);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.5;
+  color: var(--text-color);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-main);
+  color: var(--heading-color);
+}
+
+a {
+  color: var(--link-color);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+nav a {
+  margin-right: 8px;
+}
+
+strong,
+b {
+  color: var(--heading-color);
+}
+
+button {
+  margin: 0;
+  cursor: pointer;
+}
+
+main {
+  line-height: 1.6;
+}
+
+table {
+  width: 100%;
+}
+
+hr {
+  border: 0;
+  border-top: 1px dashed;
+}
+
+img {
+  max-width: 100%;
+}
+
+pre {
+  padding: 20px;
+}
+
+*:not(pre)>code {
+  font-family: monospace;
+  padding: 2px;
+  background-color: var(--code-background-color);
+  color: var(--code-color);
+  border-radius: 3px;
+}
+
+blockquote {
+  border-left: 1px solid #999;
+  color: var(--code-color);
+  padding-left: 20px;
+  font-style: italic;
+}
+
+footer {
+  padding: 25px 0;
+  text-align: center;
+}
+
+time {
+  font-family: monospace;
+  font-style: normal;
+  font-size: 15px;
+}
+
+.title:hover {
+  text-decoration: none;
+}
+
+.title h1 {
+  font-size: 1.5em;
+}
+
+.inline {
+  width: auto !important;
+}
+
+.highlight,
+.code {
+  padding: 1px 15px;
+  background-color: var(--code-background-color);
+  color: var(--code-color);
+  border-radius: 3px;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  overflow-x: auto;
+}
+
+/* blog post list */
+ul.blog-posts {
+  list-style-type: none;
+  padding: unset;
+}
+
+ul.blog-posts li {
+  display: flex;
+}
+
+ul.blog-posts li span {
+  flex: 0 0 130px;
+}
+
+ul.blog-posts li a:visited {
+  color: var(--visited-color);
+}
+
+/* tags */
+.tags {
+  font-size: 0.83rem;
+}
+
+.tag {
+  margin-right: 0.25rem;
+}
+
+.filter-title {
+  margin-bottom: 0;
+}
+
+.remove-filter {
+  font-size: 0.83rem;
+}
+
+/* search */
+form {
+  line-height: 1;
+}
+
+/* item-index and item-groups */
+.item-index ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.item-index a {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--dim);
+  border-radius: 4px;
+  text-decoration: none;
+}
+ul.item-groups,
+.item-groups ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.item-groups li {
+    display: flex;
+    align-items: baseline;
+    gap: 1ch;
+    border-bottom: 1px solid var(--dim);
+}
+.item-groups li:last-child {
+    border-bottom: none;
+}
+.item-groups li a {
+    text-decoration: none;
+}
+.item-groups time {
+    color: var(--dim);
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+.item-groups .title {
+    text-decoration: underline;
+}
+
+/* draft-preview styles */
+.preview-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 85vh; /* Adjusted to fit viewport better */
+}
+.pane {
+    display: flex;
+}
+.pane:first-of-type {
+    height: 40%;
+}
+.pane:last-of-type {
+    height: 60%;
+    overflow-y: auto;
+    border: 1px solid var(--dim);
+    background: white;
+}
+#markdown-input {
+  width: 100%;
+  flex-grow: 1; /* Make textarea fill its pane */
+  border: 1px solid var(--dim);
+  padding: 1rem;
+  font-family: monospace;
+  font-size: 16px;
+  resize: vertical;
+  background: rgba(0,0,0,0.02);
+}
+#preview-wrapper {
+    width: 100%;
+}
+/* Ensure preview matches blog headers */
+#preview-wrapper h1:first-child { margin-top: 0; }
+
+/* about.astro styles */
+.social-links {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+}
+.social-links a {
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.social-links a:hover {
+  background-color: #eee;
+}
