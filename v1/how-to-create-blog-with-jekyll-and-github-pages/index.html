@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="/v1/assets/images/android-chrome-512x512.png">
+    <title>How to create blog with Jekyll and Github pages | vikassharma.me</title>
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>How to create blog with Jekyll and Github pages | Vikas Sharma</title>
+<meta name="generator" content="Jekyll v3.9.2" />
+<meta property="og:title" content="How to create blog with Jekyll and Github pages" />
+<meta name="author" content="Vikas Sharma" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="If you always wanted to start your blog and don’t know where to start. Well, just follow this quick guide and by the end of this article, you’ll have your own working blog live on internet (sounds easy right, well it is actually easy. Let’s get to it!)." />
+<meta property="og:description" content="If you always wanted to start your blog and don’t know where to start. Well, just follow this quick guide and by the end of this article, you’ll have your own working blog live on internet (sounds easy right, well it is actually easy. Let’s get to it!)." />
+<link rel="canonical" href="https://vikassharma.me/v1/how-to-create-blog-with-jekyll-and-github-pages/" />
+<meta property="og:url" content="https://vikassharma.me/v1/how-to-create-blog-with-jekyll-and-github-pages/" />
+<meta property="og:site_name" content="Vikas Sharma" />
+<meta property="og:image" content="https://vikassharma.me/v1/assets/images/jekyll-github.jpeg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-11-12T11:16:00-06:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://vikassharma.me/v1/assets/images/jekyll-github.jpeg" />
+<meta property="twitter:title" content="How to create blog with Jekyll and Github pages" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Vikas Sharma"},"dateModified":"2022-11-12T11:16:00-06:00","datePublished":"2022-11-12T11:16:00-06:00","description":"If you always wanted to start your blog and don’t know where to start. Well, just follow this quick guide and by the end of this article, you’ll have your own working blog live on internet (sounds easy right, well it is actually easy. Let’s get to it!).","headline":"How to create blog with Jekyll and Github pages","image":"https://vikassharma.me/v1/assets/images/jekyll-github.jpeg","mainEntityOfPage":{"@type":"WebPage","@id":"https://vikassharma.me/v1/how-to-create-blog-with-jekyll-and-github-pages/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://vikassharma.me/v1/assets/images/android-chrome-512x512.png"},"name":"Vikas Sharma"},"url":"https://vikassharma.me/v1/how-to-create-blog-with-jekyll-and-github-pages/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="/v1/assets/css/screen.css" rel="stylesheet">
+    <link href="/v1/assets/css/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="/v1/assets/js/jquery.min.js"></script>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WC7F9C2X');</script>
+    <!-- End Google Tag Manager -->
+</head>
+
+
+
+
+
+<body class="layout-post">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WC7F9C2X"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- defer loading of font and font awesome -->
+    <noscript id="deferred-styles">
+        <link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i"
+            rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+            integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    </noscript>
+
+
+    <!-- Begin Menu Navigation
+================================================== -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+
+        <div class="container pr-0">
+
+            <!-- Begin Logo -->
+            <a class="navbar-brand" href="/v1/">
+                <img src="/v1/assets/images/android-chrome-512x512.png" alt="vikassharma.me">
+                vikassharma.me
+            </a>
+            <!-- End Logo -->
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMediumish">
+
+                <!-- Begin Menu -->
+                <ul class="navbar-nav ml-auto">
+
+                    
+                    <li class="nav-item">
+                    
+                        <a class="nav-link" href="/v1/">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/v1/blog">Blog</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/v1/about">About</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/v1/resume">Resume</a>
+                    </li>
+
+                    <script src="/v1/assets/js/lunr.js"></script>
+
+
+<style>
+    .lunrsearchresult .title {color: #d9230f;}
+    .lunrsearchresult .url {color: silver;}
+    .lunrsearchresult a {display: block; color: #777;}
+    .lunrsearchresult a:hover, .lunrsearchresult a:focus {text-decoration: none;}
+    .lunrsearchresult a:hover .title {text-decoration: underline;}
+</style>
+
+
+<form class="bd-search" onSubmit="return lunr_search(document.getElementById('lunrsearch').value);">
+    <input type="text" class="form-control text-small launch-modal-search" id="lunrsearch" name="q" maxlength="255" value="" placeholder="Type and enter..."/>
+</form>
+
+<div id="lunrsearchresults">
+    <ul></ul>
+</div>
+
+<script src="/v1/assets/js/lunrsearchengine.js"></script>
+
+                </ul>
+                <!-- End Menu -->
+
+            </div>
+
+        </div>
+    </nav>
+    <!-- End Navigation
+================================================== -->
+
+    <div class="site-content">
+
+        <div class="container">
+
+            <!-- Site Title
+================================================== -->
+            <!-- <div class="mainheading">
+                <h1 class="sitetitle">vikassharma.me</h1>
+                <p class="lead">
+                    Expressing my thoughts here.
+                </p>
+            </div> -->
+
+            <!-- Content
+================================================== -->
+            <div class="main-content">
+                <!-- Begin Article
+================================================== -->
+<div class="container">
+    <div class="row">
+
+        <!-- Post Share -->
+        <div class="col-md-2 pl-0">
+            <div class="share sticky-top sticky-top-offset">
+    <p>
+        Share
+    </p>
+    <ul>
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://twitter.com/intent/tweet?text=How to create blog with Jekyll and Github pages&url=https://vikassharma.me/v1/how-to-create-blog-with-jekyll-and-github-pages/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://facebook.com/sharer.php?u=https://vikassharma.me/v1/how-to-create-blog-with-jekyll-and-github-pages/" onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=https://vikassharma.me/v1/how-to-create-blog-with-jekyll-and-github-pages/" onclick="window.open(this.href, 'width=550,height=435');return false;">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+        </li>
+
+    </ul>
+    
+    <div class="sep">
+    </div>
+    <ul>
+        <li>
+        <a class="small smoothscroll" href="#disqus_thread"></a>
+        </li>
+    </ul>
+    
+</div>
+
+        </div>
+
+        <!-- Post -->
+        <div class="col-md-9 flex-first flex-md-unordered">
+            <div class="mainheading">
+
+                <!-- Post Title -->
+                <h1 class="posttitle">How to create blog with Jekyll and Github pages</h1>
+
+            </div>
+
+            <!-- Adsense if enabled from _config.yml (change your pub id and slot) -->
+            
+            <!-- End Adsense -->
+
+            <!-- Post Featured Image -->
+            
+
+            
+            <img class="featured-image img-fluid lazyimg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" data-src="/v1/assets/images/jekyll-github.jpeg" alt="How to create blog with Jekyll and Github pages">
+            
+
+            
+            <!-- End Featured Image -->
+
+            <!-- Post Content -->
+            <div class="article-post">
+                <!-- Toc if any -->
+                
+                <!-- End Toc -->
+                <p>If you always wanted to start your blog and don’t know where to start. Well, just follow this quick guide and by the end of this article, you’ll have your own working blog live on internet (sounds easy right, well it is actually easy. Let’s get to it!).</p>
+
+<p>In this guide, we’ll go through the steps to bring our exciting blog to life (<em>yay!!</em>)</p>
+<ol>
+  <li><a href="#create-github-pages-repository">Step 1</a> - Create <a href="https://github.com/">GitHub</a> account (<em>in case you already don’t have one</em>) and create a public repository to host our blog’s code. (We’ll use <a href="https://pages.github.com/">GitHub Pages</a> to host our blog for <strong>Free</strong>, exciting right!).</li>
+  <li><a href="#setup-and-configure-jekyll">Step 2</a> - Set up <a href="https://jekyllrb.com/">Jekyll</a> (a tool to generate static sites using markdown syntax) in your computer. By end of this step, our blog should be up and running.</li>
+  <li><a href="#optional-configure-custom-domain">Step 3</a> - (By the way, this is an optional step) If you have your own domain, we’ll configure DNS settings to point it to our newly created blog.</li>
+</ol>
+
+<h1 id="create-github-pages-repository">Create <code class="language-plaintext highlighter-rouge">GitHub Pages</code> repository</h1>
+<ul>
+  <li>Create <a href="https://github.com/">GitHub</a> account (<em>in case you already don’t have one</em>).</li>
+  <li>Create a new repository</li>
+</ul>
+
+<p>          <img src="../assets/images/create-new-repository.gif" alt="create-new-repository.gif" /></p>
+<ul>
+  <li>Name your repository as <strong><code class="language-plaintext highlighter-rouge">&lt;github-username&gt;.github.io</code></strong> (<em>well this is important, other names won’t work here.</em>)</li>
+  <li>Set the visibility of this repository as <code class="language-plaintext highlighter-rouge">public</code> and choose <code class="language-plaintext highlighter-rouge">Jekyll</code> template for your <code class="language-plaintext highlighter-rouge">.gitignore</code> file as shown below.</li>
+</ul>
+
+<p>          <img src="../assets/images/repo-visibility-and-gitignore.png" alt="repo-visibility-and-gitignore.png" width="300px" /></p>
+
+<h1 id="setup-and-configure-jekyll">Setup and configure Jekyll</h1>
+<h2 id="requirements">Requirements</h2>
+<ul>
+  <li><a href="https://www.ruby-lang.org/en/downloads/">Ruby</a> version <strong>2.5.0</strong> or higher, including all development headers (check your Ruby version using <code class="language-plaintext highlighter-rouge">ruby -v</code>)</li>
+  <li><a href="https://rubygems.org/pages/download">RubyGems</a> (check your Gems version using <code class="language-plaintext highlighter-rouge">gem -v</code>)</li>
+  <li><a href="https://gcc.gnu.org/install/">GCC</a> and <a href="https://www.gnu.org/software/make/">Make</a> (check versions using <code class="language-plaintext highlighter-rouge">gcc -v</code>,<code class="language-plaintext highlighter-rouge">g++ -v</code>, and <code class="language-plaintext highlighter-rouge">make -v</code>)</li>
+</ul>
+
+<h2 id="installation">Installation</h2>
+<p>For detailed install instructions, follow the guide for your operating system.</p>
+<ul>
+  <li><a href="https://jekyllrb.com/docs/installation/macos/">macOS</a></li>
+  <li><a href="https://jekyllrb.com/docs/installation/ubuntu/">Ubuntu</a></li>
+  <li><a href="https://jekyllrb.com/docs/installation/other-linux/">Other Linux</a></li>
+  <li><a href="https://jekyllrb.com/docs/installation/windows/">Windows</a></li>
+</ul>
+
+<h2 id="install-jekyll">Install Jekyll</h2>
+<p>After installing Ruby with chruby, let’s install the latest <code class="language-plaintext highlighter-rouge">jekyll</code> and <code class="language-plaintext highlighter-rouge">bundle</code> gems:</p>
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>gem <span class="nb">install </span>jekyll bundler
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="create-site-with-jekyll">Create site with Jekyll</h2>
+<ul>
+  <li>Clone the newly created repository to your local computer. (see if you can give some link for cloning)</li>
+  <li>Open terminal in the directory where you just cloned the github repository.
+    <div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">cd </span>REPOSITORY-NAME
+<span class="c"># Changes the working directory</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>Create new jekyll site by running following command
+    <div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>jekyll new <span class="nb">.</span>
+<span class="c"># "." tells jekyll utility to create new site in current directory</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>Now, it’s time to see our new blog in our local computer.
+    <div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>bundle <span class="nb">exec </span>jekyll serve
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>If everything went well then you should see the following output. Trying running the url <code class="language-plaintext highlighter-rouge">http://127.0.0.1:4000/</code>. If you’re getting some error then try the next step.
+    <div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>    Server address: http://127.0.0.1:4000/
+  Server running... press ctrl-c to stop.
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>[Optional step] Open <code class="language-plaintext highlighter-rouge">&lt;Parent Repo folder&gt;/Gemfile</code> in text editor of your choice and and add following line.
+    <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>gem "webrick", "~&gt; 1.7"
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>[Optional step] Install the gems from Gemfile by running following command.
+    <div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>bundle
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>Commit your changes to git repo and push these changes to remote branch.</li>
+</ul>
+
+<h2 id="github-pages---publish-settings">GitHub pages - publish settings</h2>
+<ul>
+  <li>Go to <a href="https://github.com/">GitHub</a> and open the repository that we created earlier and go to <code class="language-plaintext highlighter-rouge">Settings</code> tab as shown below.</li>
+</ul>
+
+<p>          <img src="../assets/images/github-settings-tab.png" alt="github-settings-tab.png" /></p>
+<ul>
+  <li>Go to <code class="language-plaintext highlighter-rouge">Pages</code> section.</li>
+</ul>
+
+<p>          <img src="../assets/images/jekyll-pages.png" alt="jekyll-pages.png" width="200px" /></p>
+<ul>
+  <li>Under the section <code class="language-plaintext highlighter-rouge">Build and deployment</code>, make sure to select <code class="language-plaintext highlighter-rouge">Source</code> as <code class="language-plaintext highlighter-rouge">Deploy from a branch</code>. Select <code class="language-plaintext highlighter-rouge">main</code> and <code class="language-plaintext highlighter-rouge">/root</code> in branch settings.</li>
+</ul>
+
+<p>          <img src="../assets/images/jekyll-build-and-deployment.png" alt="jekyll-build-and-deployment.png" /></p>
+
+<p>Congratulations 👏, your blog is live at <code class="language-plaintext highlighter-rouge">https://&lt;username&gt;.github.io</code></p>
+
+<h1 id="optional-configure-custom-domain">[Optional] Configure custom domain</h1>
+<p>Well, if you already have your own domain or planning to have one, then following steps might interest you.</p>
+<ul>
+  <li>Go to <code class="language-plaintext highlighter-rouge">Manage DNS</code> section of your domain provider.</li>
+  <li>Add following DNS records with exact same values.</li>
+</ul>
+
+<p>          <img src="../assets/images/github-pages-dns.png" alt="github-pages-dns.png" width="150px" /></p>
+<ul>
+  <li>Add another record with <code class="language-plaintext highlighter-rouge">Type=CNAME</code>, <code class="language-plaintext highlighter-rouge">Name=www</code> and <code class="language-plaintext highlighter-rouge">Data=&lt;username.github.io&gt;</code></li>
+  <li>Under <code class="language-plaintext highlighter-rouge">Settings &gt; Pages &gt; Custom Domain</code> add your domain name (e.g. example.com) and click on <code class="language-plaintext highlighter-rouge">Save</code>.</li>
+</ul>
+
+<p>That’s it, we’re done with setup here :) Your custom domain should now point to your newly created blog.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+<p>I hope you’re able to successfully set up your blog by following the instructions given in this post. Do let me know in comments, if you find it useful. I’ll try my best to help with any issues that you might face during this setup.</p>
+
+<p>Cheers folks!</p>
+
+<h1 id="references">References</h1>
+<ul>
+  <li>https://jekyllrb.com/docs/step-by-step/01-setup/</li>
+  <li>https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/creating-a-github-pages-site-with-jekyll</li>
+</ul>
+
+            </div>
+
+            <!-- Rating -->
+            
+
+            <!-- Post Date -->
+            <p>
+            <small>
+                <span class="post-date"><time class="post-date" datetime="2022-11-12">12 Nov 2022</time></span>           
+                
+                </small>
+            </p>
+
+            <!-- Post Categories -->
+            <div class="after-post-cats">
+                <ul class="tags mb-4">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/v1/categories#technical">technical</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Categories -->
+
+            <!-- Post Tags -->
+            <div class="after-post-tags">
+                <ul class="tags">
+                    
+                    
+                </ul>
+            </div>
+            <!-- End Tags -->
+
+            <!-- Prev/Next -->
+            <div class="row PageNavigation d-flex justify-content-between font-weight-bold">
+            
+            <a class="prev d-block col-md-6" href="/v1/hello-world/"> &laquo; Hello world!</a>
+            
+            
+            <a class="next d-block col-md-6 text-lg-right" href="/v1/regex-with-python/">Understanding Regular Expressions in Python &raquo; </a>
+            
+            <div class="clearfix"></div>
+            </div>
+            <!-- End Categories -->
+
+        </div>
+        <!-- End Post -->
+
+    </div>
+</div>
+<!-- End Article
+================================================== -->
+
+<!-- Begin Comments
+================================================== -->
+
+    <div class="container">
+        <div id="comments" class="row justify-content-center mb-5">
+            <div class="col-md-8">
+                <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'vikassharma-me'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+            </div>
+        </div>
+    </div>
+
+<!--End Comments
+================================================== -->
+
+<!-- Review with LD-JSON, adapt it for your needs if you like, but make sure you test the generated HTML source code first: 
+https://search.google.com/structured-data/testing-tool/u/0/
+================================================== -->
+
+            </div>
+
+            
+
+        </div>
+
+        <!-- Categories Jumbotron
+================================================== -->
+        <div class="jumbotron fortags">
+            <div class="d-md-flex h-100">
+                <div class="col-md-4 transpdark align-self-center text-center h-100">
+                    <div class="d-md-flex align-items-center justify-content-center h-100">
+                        <h2 class="d-md-block align-self-center py-1 font-weight-light">Explore <span
+                                class="d-none d-md-inline">→</span></h2>
+                    </div>
+                </div>
+                <div class="col-md-8 p-5 align-self-center text-center">
+                    
+                    
+                    
+                    <a class="mt-1 mb-1"
+                        href="/v1/categories#personal">personal (2)</a>
+                    
+                    <a class="mt-1 mb-1"
+                        href="/v1/categories#first-post">first-post (1)</a>
+                    
+                    <a class="mt-1 mb-1"
+                        href="/v1/categories#technical">technical (7)</a>
+                    
+                    <a class="mt-1 mb-1"
+                        href="/v1/categories#leetcode">leetcode (2)</a>
+                    
+                    <a class="mt-1 mb-1"
+                        href="/v1/categories#blind-75">blind-75 (2)</a>
+                    
+                    <a class="mt-1 mb-1"
+                        href="/v1/categories#sliding-window">sliding-window (1)</a>
+                    
+                    <a class="mt-1 mb-1"
+                        href="/v1/categories#frontend">frontend (1)</a>
+                    
+                    <a class="mt-1 mb-1"
+                        href="/v1/categories#poem">poem (2)</a>
+                    
+                    <a class="mt-1 mb-1"
+                        href="/v1/categories#sticky-notes">sticky-notes (14)</a>
+                    
+                    <a class="mt-1 mb-1"
+                        href="/v1/categories#requests-sticky-notes">requests-sticky-notes (12)</a>
+                    
+                    <a class="mt-1 mb-1"
+                        href="/v1/categories#til">til (1)</a>
+                    
+                    
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- Begin Footer
+================================================== -->
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                        Copyright © 2026 vikassharma.me
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- End Footer
+================================================== -->
+
+    </div> <!-- /.site-content -->
+
+    <!-- Scripts
+================================================== -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+    <script src="/v1/assets/js/mediumish.js"></script>
+    
+    <script src="/v1/assets/js/lazyload.js"></script>
+    
+    <script src="/v1/assets/js/ie10-viewport-bug-workaround.js"></script>
+    
+    <script id="dsq-count-scr" src="//vikassharma-me.disqus.com/count.js"></script>
+    
+
+</body>
+
+</html>

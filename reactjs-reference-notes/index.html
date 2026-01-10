@@ -1,0 +1,446 @@
+<!DOCTYPE html><html lang="en"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/x-icon" href="/favicon.ico"><meta name="generator" content="Astro v5.16.4"><!-- Canonical URL --><link rel="canonical" href="https://vikassharma.me/reactjs-reference-notes/"><!-- Primary Meta Tags --><title>ReactJs reference notes | &lt;/&gt; Vikas Sharma</title><meta name="title" content="ReactJs reference notes"><meta name="description" content="<meta name=&#34;twitter:card&#34; content=&#34;summarylargeimage&#34;> <meta name=&#34;twitter:site&#34; content=&#34;@i_vikassharma&#34;> <meta name=&#34;twitter:creator&#34; content=&#34;@i_vikassharma&#34;..."><!-- Open Graph / Facebook --><meta property="og:type" content="article"><meta property="og:url" content="https://vikassharma.me/reactjs-reference-notes/"><meta property="og:title" content="ReactJs reference notes"><meta property="og:description" content="<meta name=&#34;twitter:card&#34; content=&#34;summarylargeimage&#34;> <meta name=&#34;twitter:site&#34; content=&#34;@i_vikassharma&#34;> <meta name=&#34;twitter:creator&#34; content=&#34;@i_vikassharma&#34;..."><meta property="og:image" content="https://vikassharma.me/images/react-reference-notes.jpeg"><meta property="article:published_time" content="2023-10-12T07:05:00.000Z"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://vikassharma.me/reactjs-reference-notes/"><meta property="twitter:title" content="ReactJs reference notes"><meta property="twitter:description" content="<meta name=&#34;twitter:card&#34; content=&#34;summarylargeimage&#34;> <meta name=&#34;twitter:site&#34; content=&#34;@i_vikassharma&#34;> <meta name=&#34;twitter:creator&#34; content=&#34;@i_vikassharma&#34;..."><meta property="twitter:image" content="https://vikassharma.me/images/react-reference-notes.jpeg"><!-- RSS Feed --><link rel="alternate" type="application/rss+xml" title="</> Vikas Sharma" href="https://vikassharma.me/rss.xml"><!-- Sitemap --><link rel="sitemap" href="/sitemap-index.xml"><!-- Google Tag Manager --><script>(function(){const GTM_ID = "GTM-WC7F9C2X";
+
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer',GTM_ID);
+})();</script><!-- End Google Tag Manager --><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-X8FQN553XQ"></script><script>(function(){const GA_ID = "G-X8FQN553XQ";
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', GA_ID);
+})();</script><style>:root{--width: 800px;--font-main: Verdana, sans-serif;--font-secondary: Verdana, sans-serif;--font-scale: 1em;--background-color: #fff;--heading-color: #222;--text-color: #444;--link-color: #3273dc;--visited-color: #8b6fcb;--code-background-color: #f2f2f2;--code-color: #222;--blockquote-color: #222}@media(prefers-color-scheme:dark){:root{--background-color: #01242e;--heading-color: #eee;--text-color: #ddd;--link-color: #8cc2dd;--visited-color: #8b6fcb}}body.dark-mode{--background-color: #01242e;--heading-color: #eee;--text-color: #ddd;--link-color: #8cc2dd;--visited-color: #8b6fcb;--code-background-color: #0d1117;--code-color: #ddd;--blockquote-color: #ccc}body{font-family:var(--font-secondary);font-size:var(--font-scale);margin:auto;padding:20px;max-width:var(--width);text-align:left;background-color:var(--background-color);word-wrap:break-word;overflow-wrap:break-word;line-height:1.5;color:var(--text-color)}h1,h2,h3,h4,h5,h6{font-family:var(--font-main);color:var(--heading-color)}a{color:var(--link-color);cursor:pointer;text-decoration:none}a:hover{text-decoration:underline}nav a{margin-right:8px}strong,b{color:var(--heading-color)}button{margin:0;cursor:pointer}main{line-height:1.6}table{width:100%}hr{border:0;border-top:1px dashed}img{max-width:100%}pre{padding:20px}*:not(pre)>code{font-family:monospace;padding:2px;background-color:var(--code-background-color);color:var(--code-color);border-radius:3px}blockquote{border-left:1px solid #999;color:var(--code-color);padding-left:20px;font-style:italic}footer{padding:25px 0;text-align:center}time{font-family:monospace;font-style:normal;font-size:15px}.title:hover{text-decoration:none}.title h1{font-size:1.5em}.inline{width:auto!important}.highlight,.code{padding:1px 15px;background-color:var(--code-background-color);color:var(--code-color);border-radius:3px;margin-block-start:1em;margin-block-end:1em;overflow-x:auto}ul.blog-posts{list-style-type:none;padding:unset}ul.blog-posts li{display:flex}ul.blog-posts li span{flex:0 0 130px}ul.blog-posts li a:visited{color:var(--visited-color)}.tags{font-size:.83rem}.tag{margin-right:.25rem}.filter-title{margin-bottom:0}.remove-filter{font-size:.83rem}form{line-height:1}.item-index ul{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:.5rem}.item-index a{display:inline-block;padding:.25rem .75rem;border:1px solid var(--dim);border-radius:4px;text-decoration:none}ul.item-groups,.item-groups ul{list-style:none;padding:0;margin:0}.item-groups li{display:flex;align-items:baseline;gap:1ch;border-bottom:1px solid var(--dim)}.item-groups li:last-child{border-bottom:none}.item-groups li a{text-decoration:none}.item-groups time{color:var(--dim);font-size:.9rem;flex-shrink:0}.item-groups .title{text-decoration:underline}.preview-container{display:flex;flex-direction:column;gap:1rem;height:85vh}.pane{display:flex}.pane:first-of-type{height:40%}.pane:last-of-type{height:60%;overflow-y:auto;border:1px solid var(--dim);background:#fff}#markdown-input{width:100%;flex-grow:1;border:1px solid var(--dim);padding:1rem;font-family:monospace;font-size:16px;resize:vertical;background:#00000005}#preview-wrapper{width:100%}#preview-wrapper h1:first-child{margin-top:0}.social-links{margin-top:2rem;display:flex;gap:1rem}.social-links a{text-decoration:none;padding:.5rem 1rem;border:1px solid #ccc;border-radius:5px}.social-links a:hover{background-color:#eee}.footer[data-astro-cid-sz7xmlte]{padding:2rem 0;text-align:center}main[data-astro-cid-ivdev4kk]{flex-grow:1}body{display:flex;flex-direction:column;min-height:100vh}
+.category-links[data-astro-cid-33jieqlm]{margin-top:1rem;margin-bottom:1rem;font-size:.9rem;color:var(--dim)}.category-links[data-astro-cid-33jieqlm] a[data-astro-cid-33jieqlm]{text-decoration:underline;text-decoration-style:dotted}
+</style></head> <body data-astro-cid-yxt6t7ye> <!-- Google Tag Manager (noscript) --> <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WC7F9C2X" height="0" width="0" style="display:none;visibility:hidden" data-astro-cid-yxt6t7ye></iframe></noscript> <!-- End Google Tag Manager (noscript) --> <header> <a class="title" href="/"> <h1>&lt;/&gt; Vikas Sharma</h1> </a> <nav> <p> <a href="/">Home</a> <a href="/blog">Blog</a> <a href="/about">About</a> <a href="/rss.xml">RSS</a> </p> </nav> </header> <main data-astro-cid-ivdev4kk>    <article> <img src="/images/react-reference-notes.jpeg" alt="ReactJs reference notes" class="header-image" loading="lazy"> <h1>ReactJs reference notes</h1> <time datetime="2023-10-12T07:05:00.000Z">12 Oct, 2023</time> <div class="category-links" data-astro-cid-33jieqlm>
+categories:
+<a href="/categories#technical" data-astro-cid-33jieqlm>technical</a>, <a href="/categories#frontend" data-astro-cid-33jieqlm>frontend</a></div> <hr>  <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@i_vikassharma">
+<meta name="twitter:creator" content="@i_vikassharma">
+<meta name="twitter:title" content="ReactJs reference notes">
+<meta name="twitter:description" content="React reference notes for quick revision #react #frontend">
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#components">Components</a>
+<ul>
+<li><a href="#functional-components">Functional Components</a></li>
+<li><a href="#class-components">Class Components</a></li>
+</ul>
+</li>
+<li><a href="#jsx-javascript-xml">JSX (JavaScript XML)</a></li>
+<li><a href="#props">Props</a></li>
+<li><a href="#state">State</a></li>
+<li><a href="#hooks">Hooks</a>
+<ul>
+<li><a href="#usestate"><code>useState</code></a></li>
+<li><a href="#useEffect"><code>useEffect</code></a></li>
+<li><a href="#useContext"><code>useContext</code></a></li>
+<li><a href="#useRef"><code>useRef</code></a></li>
+<li><a href="#custom-hooks"><code>Custom Hooks</code></a></li>
+</ul>
+</li>
+<li><a href="#rendering">Rendering</a></li>
+<li><a href="#component-communication">Component Communication</a></li>
+<li><a href="#styling">Styling</a></li>
+<li><a href="#virtual-dom">Virtual DOM</a></li>
+<li><a href="#react-component-lifecycle">React Component Lifecycle</a>
+<ul>
+<li><a href="#mounting-phase">Mounting Phase</a>
+<ul>
+<li><a href="#constructor"><code>constructor()</code></a></li>
+<li><a href="#render"><code>render()</code></a></li>
+<li><a href="#componentdidmount"><code>componentDidMount()</code></a></li>
+</ul>
+</li>
+<li><a href="#updating-phase">Updating Phase</a>
+<ul>
+<li><a href="#static-getderivedstatefromprops"><code>static getDerivedStateFromProps()</code></a></li>
+<li><a href="#shouldcomponentupdate"><code>shouldComponentUpdate()</code></a></li>
+<li><a href="#render-1"><code>render()</code></a></li>
+<li><a href="#getsnapshotbeforeupdate"><code>getSnapshotBeforeUpdate()</code></a></li>
+<li><a href="#componentdidupdate"><code>componentDidUpdate()</code></a></li>
+</ul>
+</li>
+<li><a href="#unmounting-phase">Unmounting Phase</a>
+<ul>
+<li><a href="#componentwillunmount"><code>componentWillUnmount()</code></a></li>
+</ul>
+</li>
+<li><a href="#error-handling">Error Handling</a>
+<ul>
+<li><a href="#componentdidcatch"><code>componentDidCatch()</code></a></li>
+</ul>
+</li>
+<li><a href="#note">Note</a></li>
+</ul>
+</li>
+<li><a href="#code-lab">Code lab</a></li>
+<li><a href="#useful-links">Useful links</a></li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<p>ReactJs is an open-source javascript library for building User interfaces. It’s declarative, efficient and flexible.</p>
+<h2 id="components">Components</h2>
+<ul>
+<li>Components are the building blocks of React applications.</li>
+<li>They are reusable, self-contained, and can be nested within other components.</li>
+<li>Components can either be <strong>functional</strong> or <strong>class-based</strong>.</li>
+</ul>
+<h3 id="functional-components">Functional Components</h3>
+<p>Simple javascript functions that return React elements (also the recommended way of writing Components). They don’t have state or lifecycle methods, but they can use hooks to add state and side effects.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="jsx"><code><span class="line"><span style="color:#F97583">const</span><span style="color:#B392F0"> HelloComponent</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> (</span><span style="color:#FFAB70">props</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">	return</span><span style="color:#E1E4E8"> &#x3C;</span><span style="color:#85E89D">h1</span><span style="color:#E1E4E8">>Hello {props.name}&#x3C;/</span><span style="color:#85E89D">h1</span><span style="color:#E1E4E8">>;</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span></code></pre>
+<h3 id="class-components">Class Components</h3>
+<p>They offer more features such as state and lifecycle methods.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="jsx"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> CounterComponent</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> React</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">Component</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">	constructor</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">props</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">		super</span><span style="color:#E1E4E8">(props);</span></span>
+<span class="line"><span style="color:#79B8FF">		this</span><span style="color:#E1E4E8">.state </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">			message: </span><span style="color:#9ECBFF">"Hello"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">			count: </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">		};</span></span>
+<span class="line"><span style="color:#E1E4E8">	}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">	componentDidMount</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#6A737D">		// runs after the component is mounted on the DOM</span></span>
+<span class="line"><span style="color:#E1E4E8">		console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Component did mount"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">	}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">	componentWillUnmount</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#6A737D">		// runs before the component is about to unmount from the DOM</span></span>
+<span class="line"><span style="color:#E1E4E8">		console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Component will unmount"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">	}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">	handleClick</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#79B8FF">		this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">setState</span><span style="color:#E1E4E8">({</span></span>
+<span class="line"><span style="color:#E1E4E8">			count: </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.state.count </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">		});</span></span>
+<span class="line"><span style="color:#E1E4E8">	}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">	render</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">		return</span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#E1E4E8">			&#x3C;</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">				&#x3C;</span><span style="color:#85E89D">h1</span><span style="color:#E1E4E8">>{</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.props.name}, current count: {</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.state.count}&#x3C;/</span><span style="color:#85E89D">h1</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">				&#x3C;</span><span style="color:#85E89D">button</span><span style="color:#B392F0"> onClick</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.handleClick}>Increment&#x3C;/</span><span style="color:#85E89D">button</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">			&#x3C;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">		);</span></span>
+<span class="line"><span style="color:#E1E4E8">	}</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h2 id="jsx-javascript-xml">JSX (JavaScript XML)</h2>
+<ul>
+<li>JSX allows you to write HTML-like code in JavaScript.</li>
+<li>It must be compiled into JavaScript using a tool like Babel.</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="jsx"><code><span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> element</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> &#x3C;</span><span style="color:#85E89D">h1</span><span style="color:#E1E4E8">>Hello, React!&#x3C;/</span><span style="color:#85E89D">h1</span><span style="color:#E1E4E8">>;</span></span></code></pre>
+<h2 id="props">Props</h2>
+<ul>
+<li>Props are <strong>Immutable data</strong> passed from <strong>parent to child</strong> components. They’re used to configure the behaviour of a component.</li>
+<li>Access using <code>props</code> in functional components or <code>this.props</code> in class components.</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="jsx"><code><span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> MyComponent</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">props</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">	return</span><span style="color:#E1E4E8"> &#x3C;</span><span style="color:#85E89D">h1</span><span style="color:#E1E4E8">>{props.name}&#x3C;/</span><span style="color:#85E89D">h1</span><span style="color:#E1E4E8">>;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#B392F0"> App</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> () </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">	return</span><span style="color:#E1E4E8"> &#x3C;</span><span style="color:#79B8FF">MyComponent</span><span style="color:#B392F0"> name</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"John Doe"</span><span style="color:#E1E4E8"> />;</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span></code></pre>
+<h2 id="state">State</h2>
+<ul>
+<li>State is a private data store that is associated with a React component.</li>
+<li>Manage component-specific data that can change over time.</li>
+<li>Use <code>useState</code> hook or <code>this.state</code> in class components.</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="jsx"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> MyComponent</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> React</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">Component</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#FFAB70">  state</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    count: </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">  };</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">  handleClick</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> () </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">    this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">setState</span><span style="color:#E1E4E8">({</span></span>
+<span class="line"><span style="color:#E1E4E8">      count: </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.state.count </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    });</span></span>
+<span class="line"><span style="color:#E1E4E8">  };</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">  render</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;</span><span style="color:#85E89D">h1</span><span style="color:#E1E4E8">>{</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.state.count}&#x3C;/</span><span style="color:#85E89D">h1</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;</span><span style="color:#85E89D">button</span><span style="color:#B392F0"> onClick</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.handleClick}>Increment&#x3C;/</span><span style="color:#85E89D">button</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    );</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h2 id="hooks">Hooks</h2>
+<p>React Hooks are functions that allow you to “hook into” React state and lifecycle features in function components. They provide a way to manage state and side-effects without using class components.</p>
+<h4 id="usestate">useState</h4>
+<ul>
+<li>Allows functional components to manage state.</li>
+<li>Takes an initial state value as an argument and returns an array with two elements: the current state value and a function to update it.</li>
+<li>Example:</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="jsx"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> React, { useState } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> 'react'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> Counter</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#E1E4E8"> [</span><span style="color:#79B8FF">count</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">setCount</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">=</span><span style="color:#B392F0"> useState</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">p</span><span style="color:#E1E4E8">>Count: {count}&#x3C;/</span><span style="color:#85E89D">p</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">button</span><span style="color:#B392F0"> onClick</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{() </span><span style="color:#F97583">=></span><span style="color:#B392F0"> setCount</span><span style="color:#E1E4E8">(count </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">)}>Increment&#x3C;/</span><span style="color:#85E89D">button</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  );</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h4 id="useeffect">useEffect</h4>
+<ul>
+<li>Performs side-effects in function components.</li>
+<li>Takes a function that contains the code for side effects and an optional array of dependencies.</li>
+<li>Only runs the function if any of the dependencies have changed.</li>
+<li>Example:</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="jsx"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> React, { useState, useEffect } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> 'react'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> Timer</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#E1E4E8"> [</span><span style="color:#79B8FF">seconds</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">setSeconds</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">=</span><span style="color:#B392F0"> useState</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">  useEffect</span><span style="color:#E1E4E8">(() </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> intervalId</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> setInterval</span><span style="color:#E1E4E8">(() </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">      setSeconds</span><span style="color:#E1E4E8">(seconds </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }, </span><span style="color:#79B8FF">1000</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> () </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">      clearInterval</span><span style="color:#E1E4E8">(intervalId);</span></span>
+<span class="line"><span style="color:#E1E4E8">    };</span></span>
+<span class="line"><span style="color:#E1E4E8">  }, [seconds]);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> &#x3C;</span><span style="color:#85E89D">p</span><span style="color:#E1E4E8">>Seconds: {seconds}&#x3C;/</span><span style="color:#85E89D">p</span><span style="color:#E1E4E8">>;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h4 id="usecontext">useContext</h4>
+<ul>
+<li>Accesses the context value created by <code>React.createContext</code>.</li>
+<li>Allows components to consume context without introducing a component tree nesting.</li>
+<li>It consists of <strong>two parts</strong>:
+<ul>
+<li>a <strong>context provider</strong> that provides the data, and a <strong>context consumer</strong> that consumes the data.</li>
+<li>The useContext() hook takes a context object as an argument and returns the current value of that context.</li>
+</ul>
+</li>
+<li>Example:</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="jsx"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> React, { useContext } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> 'react'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> MyContext</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> React.</span><span style="color:#B392F0">createContext</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> MyComponent</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> contextValue</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> useContext</span><span style="color:#E1E4E8">(MyContext);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> &#x3C;</span><span style="color:#85E89D">p</span><span style="color:#E1E4E8">>Context Value: {contextValue}&#x3C;/</span><span style="color:#85E89D">p</span><span style="color:#E1E4E8">>;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h4 id="usereducer">useReducer</h4>
+<ul>
+<li>Manages complex state logic by using a reducer function.</li>
+<li>Similar to <code>useState</code>, but with more control over state updates.</li>
+<li>Example:</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="jsx"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> React, { useReducer } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> 'react'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> initialState</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> { count: </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8"> };</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> reducer</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">state</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">action</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">  switch</span><span style="color:#E1E4E8"> (action.type) {</span></span>
+<span class="line"><span style="color:#F97583">    case</span><span style="color:#9ECBFF"> 'increment'</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#F97583">      return</span><span style="color:#E1E4E8"> { count: state.count </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8"> };</span></span>
+<span class="line"><span style="color:#F97583">    case</span><span style="color:#9ECBFF"> 'decrement'</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#F97583">      return</span><span style="color:#E1E4E8"> { count: state.count </span><span style="color:#F97583">-</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8"> };</span></span>
+<span class="line"><span style="color:#F97583">    default</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#F97583">      return</span><span style="color:#E1E4E8"> state;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> Counter</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#E1E4E8"> [</span><span style="color:#79B8FF">state</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">dispatch</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">=</span><span style="color:#B392F0"> useReducer</span><span style="color:#E1E4E8">(reducer, initialState);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">p</span><span style="color:#E1E4E8">>Count: {state.count}&#x3C;/</span><span style="color:#85E89D">p</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">button</span><span style="color:#B392F0"> onClick</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{() </span><span style="color:#F97583">=></span><span style="color:#B392F0"> dispatch</span><span style="color:#E1E4E8">({ type: </span><span style="color:#9ECBFF">'increment'</span><span style="color:#E1E4E8"> })}>Increment&#x3C;/</span><span style="color:#85E89D">button</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">button</span><span style="color:#B392F0"> onClick</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{() </span><span style="color:#F97583">=></span><span style="color:#B392F0"> dispatch</span><span style="color:#E1E4E8">({ type: </span><span style="color:#9ECBFF">'decrement'</span><span style="color:#E1E4E8"> })}>Decrement&#x3C;/</span><span style="color:#85E89D">button</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  );</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h4 id="useref">useRef</h4>
+<ul>
+<li>Takes an initial value as an argument and returns an object with a current property that points to the current value of the reference.</li>
+<li>Creates a mutable ref object to interact with DOM elements or store mutable values.</li>
+<li>Does not cause re-renders when the ref value changes.</li>
+<li>Example:</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="jsx"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> React, { useRef } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> 'react'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> InputWithFocus</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> inputRef</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> useRef</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#B392F0"> focusInput</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> () </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    inputRef.current.</span><span style="color:#B392F0">focus</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">  };</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">input</span><span style="color:#B392F0"> ref</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{inputRef} </span><span style="color:#B392F0">type</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"text"</span><span style="color:#E1E4E8"> /></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">button</span><span style="color:#B392F0"> onClick</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{focusInput}>Focus Input&#x3C;/</span><span style="color:#85E89D">button</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  );</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h4 id="custom-hooks">Custom Hooks</h4>
+<ul>
+<li>Allows you to create reusable hooks to encapsulate logic.</li>
+<li>Typically start with the word “use” to indicate that it’s a hook.</li>
+<li>Example:</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="jsx"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { useState, useEffect } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> 'react'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> useLocalStorage</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">key</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">initialValue</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#E1E4E8"> [</span><span style="color:#79B8FF">value</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">setValue</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">=</span><span style="color:#B392F0"> useState</span><span style="color:#E1E4E8">(() </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> storedValue</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> localStorage.</span><span style="color:#B392F0">getItem</span><span style="color:#E1E4E8">(key);</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> storedValue </span><span style="color:#F97583">?</span><span style="color:#79B8FF"> JSON</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">parse</span><span style="color:#E1E4E8">(storedValue) </span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> initialValue;</span></span>
+<span class="line"><span style="color:#E1E4E8">  });</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">  useEffect</span><span style="color:#E1E4E8">(() </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    localStorage.</span><span style="color:#B392F0">setItem</span><span style="color:#E1E4E8">(key, </span><span style="color:#79B8FF">JSON</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">stringify</span><span style="color:#E1E4E8">(value));</span></span>
+<span class="line"><span style="color:#E1E4E8">  }, [key, value]);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> [value, setValue];</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// Usage</span></span>
+<span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> App</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#E1E4E8"> [</span><span style="color:#79B8FF">name</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">setName</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">=</span><span style="color:#B392F0"> useLocalStorage</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'name'</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">'Guest'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">p</span><span style="color:#E1E4E8">>Hello, {name}&#x3C;/</span><span style="color:#85E89D">p</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">input</span></span>
+<span class="line"><span style="color:#B392F0">        type</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"text"</span></span>
+<span class="line"><span style="color:#B392F0">        value</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{name}</span></span>
+<span class="line"><span style="color:#B392F0">        onChange</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{(</span><span style="color:#FFAB70">e</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#B392F0"> setName</span><span style="color:#E1E4E8">(e.target.value)}</span></span>
+<span class="line"><span style="color:#E1E4E8">      /></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  );</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h2 id="rendering">Rendering</h2>
+<ul>
+<li>To render a component, we need to use <code>ReactDOM.render()</code> method, which takes two arguments: the component to render and the DOM element where to render it.</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="jsx"><code><span class="line"><span style="color:#E1E4E8">ReactDOM.</span><span style="color:#B392F0">render</span><span style="color:#E1E4E8">(&#x3C;</span><span style="color:#79B8FF">Hello</span><span style="color:#B392F0"> name</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"World"</span><span style="color:#E1E4E8"> />, document.</span><span style="color:#B392F0">getElementById</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"root"</span><span style="color:#E1E4E8">));</span></span></code></pre>
+<ul>
+<li>To use a component inside another component, we need to use it as a JSX element with its name as a tag. We can also pass props to it as attributes.</li>
+<li>For example, if we want to use our Hello component inside another component called App, we can write something like this:</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="jsx"><code><span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> App</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#79B8FF">Hello</span><span style="color:#B392F0"> name</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"Alice"</span><span style="color:#E1E4E8"> /></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#79B8FF">Hello</span><span style="color:#B392F0"> name</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"Bob"</span><span style="color:#E1E4E8"> /></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#79B8FF">Hello</span><span style="color:#B392F0"> name</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"Charlie"</span><span style="color:#E1E4E8"> /></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  );</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h2 id="component-communication">Component Communication</h2>
+<ul>
+<li>Parent to Child: Pass data via <code>props</code>.</li>
+<li>Child to Parent: Callback functions passed as props.</li>
+</ul>
+<h2 id="styling">Styling</h2>
+<ul>
+<li>Inline styles: Use <code>style</code> attribute.</li>
+<li>CSS Modules, Styled Components, or popular CSS frameworks.</li>
+</ul>
+<h2 id="virtual-dom">Virtual DOM</h2>
+<ul>
+<li>The Virtual DOM is a lightweight in-memory representation of the actual DOM.
+It’s used by React to optimize the process of updating the user interface.</li>
+<li>When there’s a change in the application’s state, React creates a new Virtual DOM tree.</li>
+<li>React then compares this new Virtual DOM tree with the previous one to identify the differences (diffing).</li>
+<li>The differences are used to update the real DOM, but only the parts that changed.</li>
+<li>This minimizes the number of updates and improves performance.</li>
+</ul>
+<h2 id="reconciliation">Reconciliation</h2>
+<h3 id="reconciliation-process">Reconciliation Process:</h3>
+<ul>
+<li>React’s process of updating the real DOM based on changes in the Virtual DOM is called reconciliation.</li>
+<li>It ensures that the user interface is always in sync with the application’s state.</li>
+</ul>
+<h3 id="keys-in-reconciliation">Keys in Reconciliation:</h3>
+<ul>
+<li>Use unique keys for each element in lists to help React identify elements more efficiently.</li>
+<li>Keys assist in minimizing unnecessary updates and re-renders.</li>
+</ul>
+<h2 id="react-component-lifecycle">React Component Lifecycle</h2>
+<h3 id="mounting-phase">Mounting Phase</h3>
+<h4 id="constructor">constructor()</h4>
+<ul>
+<li>Constructor is called when a component instance is created.</li>
+<li>Initialize state and bind methods in the constructor.</li>
+</ul>
+<h4 id="render">render()</h4>
+<ul>
+<li>Render method returns the JSX that represents the component’s UI.</li>
+<li>It’s a pure function that should not modify the component’s state.</li>
+</ul>
+<h4 id="componentdidmount">componentDidMount()</h4>
+<ul>
+<li>Invoked after the component is rendered.</li>
+<li>Ideal for setting up side effects, such as data fetching or subscribing to events.</li>
+</ul>
+<h3 id="updating-phase">Updating Phase</h3>
+<h4 id="static-getderivedstatefromprops">static getDerivedStateFromProps()</h4>
+<ul>
+<li>Rarely used, but if necessary, it’s used to update state based on props.</li>
+</ul>
+<h4 id="shouldcomponentupdate">shouldComponentUpdate()</h4>
+<ul>
+<li>Determines whether the component should re-render.</li>
+<li>Return <code>true</code> if you want to update, <code>false</code> to skip re-rendering.</li>
+</ul>
+<h4 id="render-1">render()</h4>
+<ul>
+<li>Re-render the component with updated props or state.</li>
+</ul>
+<h4 id="getsnapshotbeforeupdate">getSnapshotBeforeUpdate()</h4>
+<ul>
+<li>Allows you to capture some information before the component updates.</li>
+<li>Use it with <code>componentDidUpdate</code> to handle interactions with the DOM.</li>
+</ul>
+<h4 id="componentdidupdate">componentDidUpdate()</h4>
+<ul>
+<li>Invoked after the component updates and the changes are reflected in the DOM.</li>
+<li>Ideal for performing side effects when props or state change.</li>
+</ul>
+<h3 id="unmounting-phase">Unmounting Phase</h3>
+<h4 id="componentwillunmount">componentWillUnmount()</h4>
+<ul>
+<li>Called before a component is removed from the DOM.</li>
+<li>Perform cleanup tasks such as canceling timers or unsubscribing from data sources.</li>
+</ul>
+<h3 id="error-handling">Error Handling</h3>
+<h4 id="componentdidcatch">componentDidCatch()</h4>
+<ul>
+<li>Captures errors in the child components during rendering.</li>
+<li>Implement this method to gracefully handle errors and display fallback UI.</li>
+</ul>
+<h3 id="note">Note:</h3>
+<ul>
+<li>React has moved away from some lifecycle methods in favor of hooks like <code>useEffect</code>.</li>
+<li>Focus on class component lifecycle for existing codebases and legacy support.</li>
+</ul>
+<h2 id="code-lab">Code lab</h2>
+<ul>
+<li>Created this very simple react app to revise the basics.</li>
+<li><a href="https://github.com/vikas3045/task-manager" target="_blank"></a><a href="https://github.com/vikas3045/task-manager">https://github.com/vikas3045/task-manager</a></li>
+</ul>
+<h2 id="useful-links">Useful links</h2>
+<ul>
+<li><a href="https://react.dev/reference/react/" target="_blank"></a><a href="https://react.dev/reference/react/">https://react.dev/reference/react/</a></li>
+<li><a href="https://create-react-app.dev/" target="_blank"></a><a href="https://create-react-app.dev/">https://create-react-app.dev/</a></li>
+</ul>  </article>    </main>  <footer class="footer" data-astro-cid-sz7xmlte> <div class="container" data-astro-cid-sz7xmlte> <p data-astro-cid-sz7xmlte>&copy; 2026 Vikas Sharma. All rights reserved.</p> </div> </footer>  </body> </html>

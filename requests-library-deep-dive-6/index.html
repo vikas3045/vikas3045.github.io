@@ -1,0 +1,85 @@
+<!DOCTYPE html><html lang="en"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/x-icon" href="/favicon.ico"><meta name="generator" content="Astro v5.16.4"><!-- Canonical URL --><link rel="canonical" href="https://vikassharma.me/requests-library-deep-dive-6/"><!-- Primary Meta Tags --><title>Requests Library Deep Dive - 6 | &lt;/&gt; Vikas Sharma</title><meta name="title" content="Requests Library Deep Dive - 6"><meta name="description" content="Continuing the study of the requests module. Today, I am diving into requests/adapters.py, which implements the low-level connection management and is crucial f..."><!-- Open Graph / Facebook --><meta property="og:type" content="article"><meta property="og:url" content="https://vikassharma.me/requests-library-deep-dive-6/"><meta property="og:title" content="Requests Library Deep Dive - 6"><meta property="og:description" content="Continuing the study of the requests module. Today, I am diving into requests/adapters.py, which implements the low-level connection management and is crucial f..."><meta property="og:image" content="https://vikassharma.me/opengraph.jpg"><meta property="article:published_time" content="2025-01-11T15:07:00.000Z"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://vikassharma.me/requests-library-deep-dive-6/"><meta property="twitter:title" content="Requests Library Deep Dive - 6"><meta property="twitter:description" content="Continuing the study of the requests module. Today, I am diving into requests/adapters.py, which implements the low-level connection management and is crucial f..."><meta property="twitter:image" content="https://vikassharma.me/opengraph.jpg"><!-- RSS Feed --><link rel="alternate" type="application/rss+xml" title="</> Vikas Sharma" href="https://vikassharma.me/rss.xml"><!-- Sitemap --><link rel="sitemap" href="/sitemap-index.xml"><!-- Google Tag Manager --><script>(function(){const GTM_ID = "GTM-WC7F9C2X";
+
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer',GTM_ID);
+})();</script><!-- End Google Tag Manager --><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-X8FQN553XQ"></script><script>(function(){const GA_ID = "G-X8FQN553XQ";
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', GA_ID);
+})();</script><style>:root{--width: 800px;--font-main: Verdana, sans-serif;--font-secondary: Verdana, sans-serif;--font-scale: 1em;--background-color: #fff;--heading-color: #222;--text-color: #444;--link-color: #3273dc;--visited-color: #8b6fcb;--code-background-color: #f2f2f2;--code-color: #222;--blockquote-color: #222}@media(prefers-color-scheme:dark){:root{--background-color: #01242e;--heading-color: #eee;--text-color: #ddd;--link-color: #8cc2dd;--visited-color: #8b6fcb}}body.dark-mode{--background-color: #01242e;--heading-color: #eee;--text-color: #ddd;--link-color: #8cc2dd;--visited-color: #8b6fcb;--code-background-color: #0d1117;--code-color: #ddd;--blockquote-color: #ccc}body{font-family:var(--font-secondary);font-size:var(--font-scale);margin:auto;padding:20px;max-width:var(--width);text-align:left;background-color:var(--background-color);word-wrap:break-word;overflow-wrap:break-word;line-height:1.5;color:var(--text-color)}h1,h2,h3,h4,h5,h6{font-family:var(--font-main);color:var(--heading-color)}a{color:var(--link-color);cursor:pointer;text-decoration:none}a:hover{text-decoration:underline}nav a{margin-right:8px}strong,b{color:var(--heading-color)}button{margin:0;cursor:pointer}main{line-height:1.6}table{width:100%}hr{border:0;border-top:1px dashed}img{max-width:100%}pre{padding:20px}*:not(pre)>code{font-family:monospace;padding:2px;background-color:var(--code-background-color);color:var(--code-color);border-radius:3px}blockquote{border-left:1px solid #999;color:var(--code-color);padding-left:20px;font-style:italic}footer{padding:25px 0;text-align:center}time{font-family:monospace;font-style:normal;font-size:15px}.title:hover{text-decoration:none}.title h1{font-size:1.5em}.inline{width:auto!important}.highlight,.code{padding:1px 15px;background-color:var(--code-background-color);color:var(--code-color);border-radius:3px;margin-block-start:1em;margin-block-end:1em;overflow-x:auto}ul.blog-posts{list-style-type:none;padding:unset}ul.blog-posts li{display:flex}ul.blog-posts li span{flex:0 0 130px}ul.blog-posts li a:visited{color:var(--visited-color)}.tags{font-size:.83rem}.tag{margin-right:.25rem}.filter-title{margin-bottom:0}.remove-filter{font-size:.83rem}form{line-height:1}.item-index ul{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:.5rem}.item-index a{display:inline-block;padding:.25rem .75rem;border:1px solid var(--dim);border-radius:4px;text-decoration:none}ul.item-groups,.item-groups ul{list-style:none;padding:0;margin:0}.item-groups li{display:flex;align-items:baseline;gap:1ch;border-bottom:1px solid var(--dim)}.item-groups li:last-child{border-bottom:none}.item-groups li a{text-decoration:none}.item-groups time{color:var(--dim);font-size:.9rem;flex-shrink:0}.item-groups .title{text-decoration:underline}.preview-container{display:flex;flex-direction:column;gap:1rem;height:85vh}.pane{display:flex}.pane:first-of-type{height:40%}.pane:last-of-type{height:60%;overflow-y:auto;border:1px solid var(--dim);background:#fff}#markdown-input{width:100%;flex-grow:1;border:1px solid var(--dim);padding:1rem;font-family:monospace;font-size:16px;resize:vertical;background:#00000005}#preview-wrapper{width:100%}#preview-wrapper h1:first-child{margin-top:0}.social-links{margin-top:2rem;display:flex;gap:1rem}.social-links a{text-decoration:none;padding:.5rem 1rem;border:1px solid #ccc;border-radius:5px}.social-links a:hover{background-color:#eee}.footer[data-astro-cid-sz7xmlte]{padding:2rem 0;text-align:center}main[data-astro-cid-ivdev4kk]{flex-grow:1}body{display:flex;flex-direction:column;min-height:100vh}
+.category-links[data-astro-cid-33jieqlm]{margin-top:1rem;margin-bottom:1rem;font-size:.9rem;color:var(--dim)}.category-links[data-astro-cid-33jieqlm] a[data-astro-cid-33jieqlm]{text-decoration:underline;text-decoration-style:dotted}
+</style></head> <body data-astro-cid-yxt6t7ye> <!-- Google Tag Manager (noscript) --> <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WC7F9C2X" height="0" width="0" style="display:none;visibility:hidden" data-astro-cid-yxt6t7ye></iframe></noscript> <!-- End Google Tag Manager (noscript) --> <header> <a class="title" href="/"> <h1>&lt;/&gt; Vikas Sharma</h1> </a> <nav> <p> <a href="/">Home</a> <a href="/blog">Blog</a> <a href="/about">About</a> <a href="/rss.xml">RSS</a> </p> </nav> </header> <main data-astro-cid-ivdev4kk>    <article>  <h1>Requests Library Deep Dive - 6</h1> <time datetime="2025-01-11T15:07:00.000Z">11 Jan, 2025</time> <div class="category-links" data-astro-cid-33jieqlm>
+categories:
+<a href="/categories#sticky-notes" data-astro-cid-33jieqlm>sticky-notes</a>, <a href="/categories#requests-sticky-notes" data-astro-cid-33jieqlm>requests-sticky-notes</a></div> <hr>  <p>Continuing the study of the <code>requests</code> module. Today, I am diving into <code>requests/adapters.py</code>, which implements the low-level connection management and is crucial for handling HTTP requests efficiently.</p>
+<h2 id="key-concepts-in-requestsadapterspy">Key Concepts in <code>requests/adapters.py</code></h2>
+<h3 id="the-httpadapter-class">The HTTPAdapter Class</h3>
+<p>The <code>HTTPAdapter</code> class is responsible for:</p>
+<ul>
+<li>Handling connections (e.g., opening, reusing and closing).</li>
+<li>Managing retries and timeouts.</li>
+<li>Sending the actual http requests using <code>urllib3</code>, which is a dependency of <code>requests</code>.</li>
+</ul>
+<p><strong>Key Attributes of Session:</strong></p>
+<ul>
+<li><code>poolmanager</code>: Manages connection pools for reusing the connections to the same host.</li>
+<li><code>max_retries</code>: Defines how many times to retry a failed request.</li>
+<li><code>timeout</code>: Sets a default timeout for requests if not provided explicitly.</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">def</span><span style="color:#79B8FF"> __init__</span><span style="color:#E1E4E8">(self, pool_connections</span><span style="color:#F97583">=</span><span style="color:#79B8FF">10</span><span style="color:#E1E4E8">, pool_maxsize</span><span style="color:#F97583">=</span><span style="color:#79B8FF">10</span><span style="color:#E1E4E8">, max_retries</span><span style="color:#F97583">=</span><span style="color:#79B8FF">3</span><span style="color:#E1E4E8">, pool_block</span><span style="color:#F97583">=</span><span style="color:#79B8FF">False</span><span style="color:#E1E4E8">):</span></span>
+<span class="line"><span style="color:#79B8FF">    self</span><span style="color:#E1E4E8">.max_retries </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> max_retries</span></span>
+<span class="line"><span style="color:#79B8FF">    self</span><span style="color:#E1E4E8">.poolmanager </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> PoolManager(</span></span>
+<span class="line"><span style="color:#FFAB70">        num_pools</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">pool_connections,</span></span>
+<span class="line"><span style="color:#FFAB70">        maxsize</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">pool_maxsize,</span></span>
+<span class="line"><span style="color:#FFAB70">        block</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">pool_block,</span></span>
+<span class="line"><span style="color:#E1E4E8">    )</span></span></code></pre>
+<ul>
+<li><code>PoolManager</code> is a feature of <code>urllib3</code> that handles connection pooling.</li>
+</ul>
+<h3 id="sending-a-request">Sending a request</h3>
+<p>The <code>send</code> method is the core of the <code>HTTPAdapter</code> class. It sends a <code>PreparedRequest</code> and returns a <code>Response</code> object.</p>
+<p><strong>Key Steps Inside <code>send</code>:</strong></p>
+<ul>
+<li>Get connection:
+A connection from a pool is fetched using <code>PoolManager</code>.</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#E1E4E8">conn </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.poolmanager.connection_from_url(request.url)</span></span></code></pre>
+<ul>
+<li>Make the request:
+The actual HTTP request is made via <code>conn.urlopen</code>, which comes from <code>urllib3</code>.</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#E1E4E8">response </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> conn.urlopen(</span></span>
+<span class="line"><span style="color:#FFAB70">    method</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">request.method,</span></span>
+<span class="line"><span style="color:#FFAB70">    url</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">request.url,</span></span>
+<span class="line"><span style="color:#FFAB70">    body</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">request.body,</span></span>
+<span class="line"><span style="color:#FFAB70">    headers</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">request.headers,</span></span>
+<span class="line"><span style="color:#FFAB70">    retries</span><span style="color:#F97583">=</span><span style="color:#79B8FF">self</span><span style="color:#E1E4E8">.max_retries,</span></span>
+<span class="line"><span style="color:#FFAB70">    timeout</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">timeout,</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span></code></pre>
+<ul>
+<li>Wrap the response:
+The raw <code>urllib3</code> response is wrapped in a <code>Response</code> object.</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#E1E4E8">response </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.build_response(request, response)</span></span></code></pre>
+<h3 id="adapter-lifecycle">Adapter lifecycle</h3>
+<ul>
+<li>Each <code>Session</code> object has a dictionary mapping schemes (like <code>http</code> and <code>https</code>) to <code>HTTPAdapter</code> instances:</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#79B8FF">self</span><span style="color:#E1E4E8">.adapters </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> {</span><span style="color:#9ECBFF">'http://'</span><span style="color:#E1E4E8">: HTTPAdapter(), </span><span style="color:#9ECBFF">'https://'</span><span style="color:#E1E4E8">: HTTPAdapter()}</span></span></code></pre>
+<ul>
+<li>When a <code>Session</code> sends a request, it looks up the adapter for the request’s URL scheme.</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">def</span><span style="color:#B392F0"> get_adapter</span><span style="color:#E1E4E8">(self, url):</span></span>
+<span class="line"><span style="color:#F97583">    for</span><span style="color:#E1E4E8"> prefix, adapter </span><span style="color:#F97583">in</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.adapters.items():</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> url.lower().startswith(prefix):</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8"> adapter</span></span></code></pre>
+<h3 id="why-connection-pooling-matters">Why Connection Pooling matters</h3>
+<ul>
+<li>Without connection pooling, every HTTP request would require a new TCP connection, which is expensive.</li>
+<li>By reusing TCP connections for requests to the same host, the <code>HTTPAdapter</code> significantly improves performance, especially for APIs or websites with multiple requests.</li>
+</ul>  </article>    </main>  <footer class="footer" data-astro-cid-sz7xmlte> <div class="container" data-astro-cid-sz7xmlte> <p data-astro-cid-sz7xmlte>&copy; 2026 Vikas Sharma. All rights reserved.</p> </div> </footer>  </body> </html>

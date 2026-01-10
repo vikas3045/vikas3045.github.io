@@ -1,0 +1,94 @@
+<!DOCTYPE html><html lang="en"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/x-icon" href="/favicon.ico"><meta name="generator" content="Astro v5.16.4"><!-- Canonical URL --><link rel="canonical" href="https://vikassharma.me/regex-with-python/"><!-- Primary Meta Tags --><title>Understanding Regular Expressions in Python | &lt;/&gt; Vikas Sharma</title><meta name="title" content="Understanding Regular Expressions in Python"><meta name="description" content="Regular expressions, often abbreviated as regex, are a powerful tool used to match patterns in strings. They are widely used in various programming languages, i..."><!-- Open Graph / Facebook --><meta property="og:type" content="article"><meta property="og:url" content="https://vikassharma.me/regex-with-python/"><meta property="og:title" content="Understanding Regular Expressions in Python"><meta property="og:description" content="Regular expressions, often abbreviated as regex, are a powerful tool used to match patterns in strings. They are widely used in various programming languages, i..."><meta property="og:image" content="https://vikassharma.me/images/coding-laptop.jpg"><meta property="article:published_time" content="2023-03-22T16:47:00.000Z"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://vikassharma.me/regex-with-python/"><meta property="twitter:title" content="Understanding Regular Expressions in Python"><meta property="twitter:description" content="Regular expressions, often abbreviated as regex, are a powerful tool used to match patterns in strings. They are widely used in various programming languages, i..."><meta property="twitter:image" content="https://vikassharma.me/images/coding-laptop.jpg"><!-- RSS Feed --><link rel="alternate" type="application/rss+xml" title="</> Vikas Sharma" href="https://vikassharma.me/rss.xml"><!-- Sitemap --><link rel="sitemap" href="/sitemap-index.xml"><!-- Google Tag Manager --><script>(function(){const GTM_ID = "GTM-WC7F9C2X";
+
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer',GTM_ID);
+})();</script><!-- End Google Tag Manager --><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-X8FQN553XQ"></script><script>(function(){const GA_ID = "G-X8FQN553XQ";
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', GA_ID);
+})();</script><style>:root{--width: 800px;--font-main: Verdana, sans-serif;--font-secondary: Verdana, sans-serif;--font-scale: 1em;--background-color: #fff;--heading-color: #222;--text-color: #444;--link-color: #3273dc;--visited-color: #8b6fcb;--code-background-color: #f2f2f2;--code-color: #222;--blockquote-color: #222}@media(prefers-color-scheme:dark){:root{--background-color: #01242e;--heading-color: #eee;--text-color: #ddd;--link-color: #8cc2dd;--visited-color: #8b6fcb}}body.dark-mode{--background-color: #01242e;--heading-color: #eee;--text-color: #ddd;--link-color: #8cc2dd;--visited-color: #8b6fcb;--code-background-color: #0d1117;--code-color: #ddd;--blockquote-color: #ccc}body{font-family:var(--font-secondary);font-size:var(--font-scale);margin:auto;padding:20px;max-width:var(--width);text-align:left;background-color:var(--background-color);word-wrap:break-word;overflow-wrap:break-word;line-height:1.5;color:var(--text-color)}h1,h2,h3,h4,h5,h6{font-family:var(--font-main);color:var(--heading-color)}a{color:var(--link-color);cursor:pointer;text-decoration:none}a:hover{text-decoration:underline}nav a{margin-right:8px}strong,b{color:var(--heading-color)}button{margin:0;cursor:pointer}main{line-height:1.6}table{width:100%}hr{border:0;border-top:1px dashed}img{max-width:100%}pre{padding:20px}*:not(pre)>code{font-family:monospace;padding:2px;background-color:var(--code-background-color);color:var(--code-color);border-radius:3px}blockquote{border-left:1px solid #999;color:var(--code-color);padding-left:20px;font-style:italic}footer{padding:25px 0;text-align:center}time{font-family:monospace;font-style:normal;font-size:15px}.title:hover{text-decoration:none}.title h1{font-size:1.5em}.inline{width:auto!important}.highlight,.code{padding:1px 15px;background-color:var(--code-background-color);color:var(--code-color);border-radius:3px;margin-block-start:1em;margin-block-end:1em;overflow-x:auto}ul.blog-posts{list-style-type:none;padding:unset}ul.blog-posts li{display:flex}ul.blog-posts li span{flex:0 0 130px}ul.blog-posts li a:visited{color:var(--visited-color)}.tags{font-size:.83rem}.tag{margin-right:.25rem}.filter-title{margin-bottom:0}.remove-filter{font-size:.83rem}form{line-height:1}.item-index ul{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:.5rem}.item-index a{display:inline-block;padding:.25rem .75rem;border:1px solid var(--dim);border-radius:4px;text-decoration:none}ul.item-groups,.item-groups ul{list-style:none;padding:0;margin:0}.item-groups li{display:flex;align-items:baseline;gap:1ch;border-bottom:1px solid var(--dim)}.item-groups li:last-child{border-bottom:none}.item-groups li a{text-decoration:none}.item-groups time{color:var(--dim);font-size:.9rem;flex-shrink:0}.item-groups .title{text-decoration:underline}.preview-container{display:flex;flex-direction:column;gap:1rem;height:85vh}.pane{display:flex}.pane:first-of-type{height:40%}.pane:last-of-type{height:60%;overflow-y:auto;border:1px solid var(--dim);background:#fff}#markdown-input{width:100%;flex-grow:1;border:1px solid var(--dim);padding:1rem;font-family:monospace;font-size:16px;resize:vertical;background:#00000005}#preview-wrapper{width:100%}#preview-wrapper h1:first-child{margin-top:0}.social-links{margin-top:2rem;display:flex;gap:1rem}.social-links a{text-decoration:none;padding:.5rem 1rem;border:1px solid #ccc;border-radius:5px}.social-links a:hover{background-color:#eee}.footer[data-astro-cid-sz7xmlte]{padding:2rem 0;text-align:center}main[data-astro-cid-ivdev4kk]{flex-grow:1}body{display:flex;flex-direction:column;min-height:100vh}
+.category-links[data-astro-cid-33jieqlm]{margin-top:1rem;margin-bottom:1rem;font-size:.9rem;color:var(--dim)}.category-links[data-astro-cid-33jieqlm] a[data-astro-cid-33jieqlm]{text-decoration:underline;text-decoration-style:dotted}
+</style></head> <body data-astro-cid-yxt6t7ye> <!-- Google Tag Manager (noscript) --> <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WC7F9C2X" height="0" width="0" style="display:none;visibility:hidden" data-astro-cid-yxt6t7ye></iframe></noscript> <!-- End Google Tag Manager (noscript) --> <header> <a class="title" href="/"> <h1>&lt;/&gt; Vikas Sharma</h1> </a> <nav> <p> <a href="/">Home</a> <a href="/blog">Blog</a> <a href="/about">About</a> <a href="/rss.xml">RSS</a> </p> </nav> </header> <main data-astro-cid-ivdev4kk>    <article> <img src="/images/coding-laptop.jpg" alt="Understanding Regular Expressions in Python" class="header-image" loading="lazy"> <h1>Understanding Regular Expressions in Python</h1> <time datetime="2023-03-22T16:47:00.000Z">23 Mar, 2023</time> <div class="category-links" data-astro-cid-33jieqlm>
+categories:
+<a href="/categories#technical" data-astro-cid-33jieqlm>technical</a></div> <hr>  <p><code>Regular expressions</code>, often abbreviated as <code>regex</code>, are a powerful tool used to match patterns in strings. They are widely used in various programming languages, including <code>Python</code>, for various purposes such as <code>searching for specific characters</code>, <code>validating inputs</code>, and <code>parsing data</code>. In this blog post, we will dive into the world of regex in Python and understand how to use them to accomplish a range of tasks.</p>
+<h2 id="what-are-regular-expressions">What are Regular Expressions?</h2>
+<p>A regular expression is a sequence of characters that define a search pattern. These patterns can be used to search, match, and manipulate text data. For example, a regular expression could be used to search for a specific pattern of characters in a string, such as email addresses, URLs, or phone numbers.</p>
+<h2 id="using-regular-expressions-in-python">Using Regular Expressions in Python</h2>
+<p>In Python, the <code>re</code> module provides a number of functions for working with regular expressions. Some of the most commonly used functions in the <code>re</code> module are:</p>
+<ul>
+<li><strong>search()</strong>: This function searches for a match in a string and returns a match object if there is a match.</li>
+<li><strong>findall()</strong>: This function returns all non-overlapping matches as a list of strings.</li>
+<li><strong>split()</strong>: This function splits a string into a list of substrings based on the specified pattern.</li>
+<li><strong>sub()</strong>: This function replaces all occurrences of a specified pattern in a string with a replacement string.</li>
+</ul>
+<h2 id="regular-expression-syntax">Regular Expression Syntax</h2>
+<p>The syntax for regular expressions in Python is similar to that used in other programming languages. Some of the most commonly used regular expression syntax include:</p>
+<ul>
+<li><strong>Literals</strong>: A literal is a character that matches itself. For example, the pattern <code>"a"</code> will match the letter <code>"a"</code> in the string.</li>
+<li><strong>Meta-characters</strong>: Meta-characters are characters with a special meaning in regular expressions. For example, the dot (<code>.</code>) matches any character except a newline, and the asterisk (<code>*</code>) matches zero or more occurrences of the preceding character.</li>
+<li><strong>Character Classes</strong>: Character classes define a set of characters that can match a single character in the string. For example, the pattern <code>"[aeiou]"</code> will match any vowel.</li>
+<li><strong>Quantifiers</strong>: Quantifiers specify the number of times a pattern should be repeated. For example, the pattern <code>"a{3}"</code> will match the string <code>"aaa"</code>.</li>
+<li><strong>Anchors</strong>: Anchors are special characters that match a position in the string rather than a character. For example, the caret (<code>^</code>) matches the start of a line, and the dollar sign (<code>$</code>) matches the end of a line.</li>
+<li><strong>Escape sequences</strong>: To match a character having special meaning in regex, you need to use a escape sequence prefix with a backslash (<code>\</code>). E.g., <code>\.</code> matches <code>"."</code>; regex <code>\+</code>matches <code>"+"</code>; and regex <code>\(</code> matches <code>"("</code>.</li>
+</ul>
+<h2 id="examples-of-using-regular-expressions-in-python">Examples of Using Regular Expressions in Python</h2>
+<p>Let’s see some examples of how regular expressions can be used in Python:</p>
+<ul>
+<li>Searching for a Pattern:</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> re</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">string </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "Hello, my email is test@example.com"</span></span>
+<span class="line"><span style="color:#E1E4E8">pattern </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"</span></span>
+<span class="line"><span style="color:#E1E4E8">match </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> re.search(pattern, string)</span></span>
+<span class="line"><span style="color:#79B8FF">print</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Email:"</span><span style="color:#E1E4E8">, match.group())</span></span></code></pre>
+<p>In this example, we are using the <code>search()</code> function to find an email address in a string. The pattern used in this example is a commonly used pattern for matching email addresses.</p>
+<ul>
+<li>Replacing a Pattern:</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> re</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">string </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "The cat is black and white"</span></span>
+<span class="line"><span style="color:#E1E4E8">pattern </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "cat"</span></span>
+<span class="line"><span style="color:#E1E4E8">replacement </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "dog"</span></span>
+<span class="line"><span style="color:#E1E4E8">new_string </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> re.sub(pattern, replacement, string)</span></span>
+<span class="line"><span style="color:#79B8FF">print</span><span style="color:#E1E4E8">(new_string)</span></span></code></pre>
+<ul>
+<li>Extracting All Matches:</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> re</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">string </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "The cats are black and white, and the dogs are brown and black"</span></span>
+<span class="line"><span style="color:#E1E4E8">pattern </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "black"</span></span>
+<span class="line"><span style="color:#E1E4E8">matches </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> re.findall(pattern, string)</span></span>
+<span class="line"><span style="color:#79B8FF">print</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Matches:"</span><span style="color:#E1E4E8">, matches)</span></span></code></pre>
+<p>In this example, we are using the <code>findall()</code> function to extract all occurrences of the word “black” in a string. The <code>findall()</code> function returns a list of all non-overlapping matches in the string.</p>
+<ul>
+<li>Splitting a String:</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> re</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">string </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "The cats are black and white, and the dogs are brown and black"</span></span>
+<span class="line"><span style="color:#E1E4E8">pattern </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "and"</span></span>
+<span class="line"><span style="color:#E1E4E8">words </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> re.split(pattern, string)</span></span>
+<span class="line"><span style="color:#79B8FF">print</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Words:"</span><span style="color:#E1E4E8">, words)</span></span></code></pre>
+<p>In this example, we are using the <code>split()</code> function to split a string into a list of words based on the pattern “and”. The <code>split()</code> function returns a list of substrings that were separated by the specified pattern.</p>
+<ul>
+<li>Replacing Multiple Occurrences:</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> re</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">string </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "The cats are black and white, and the dogs are brown and black"</span></span>
+<span class="line"><span style="color:#E1E4E8">pattern </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "and"</span></span>
+<span class="line"><span style="color:#E1E4E8">new_string </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> re.sub(pattern, </span><span style="color:#9ECBFF">"&#x26;"</span><span style="color:#E1E4E8">, string)</span></span>
+<span class="line"><span style="color:#79B8FF">print</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"New String:"</span><span style="color:#E1E4E8">, new_string)</span></span></code></pre>
+<p>In this example, we are using the <code>sub()</code> function to replace all occurrences of the word “and” with ”&#x26;”. The <code>sub()</code> function replaces all occurrences of the specified pattern in the string with a replacement string.</p>
+<p>These are just a few examples of the many things that you can do with regular expressions in Python. Regular expressions can be used for a wide range of tasks, from simple text processing to complex data parsing. With a little practice and patience, you can master the art of regex in Python and unleash its full potential!</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Regular expressions are a powerful tool that can be used to search, match, and manipulate text data in Python. They can be used for a variety of purposes, including searching for specific characters, validating inputs, and parsing data. By understanding the syntax and functions provided by the <code>re</code> module in Python, you can take advantage of the power and flexibility of regular expressions to solve a wide range of programming challenges.</p>  </article>    </main>  <footer class="footer" data-astro-cid-sz7xmlte> <div class="container" data-astro-cid-sz7xmlte> <p data-astro-cid-sz7xmlte>&copy; 2026 Vikas Sharma. All rights reserved.</p> </div> </footer>  </body> </html>
