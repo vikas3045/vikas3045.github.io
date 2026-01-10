@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="/v1/assets/images/android-chrome-512x512.png">
+    <title>How to solve Sliding Window Problems | vikassharma.me</title>
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>How to solve Sliding Window Problems | Vikas Sharma</title>
+<meta name="generator" content="Jekyll v3.9.2" />
+<meta property="og:title" content="How to solve Sliding Window Problems" />
+<meta name="author" content="Vikas Sharma" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Expressing my thoughts here." />
+<meta property="og:description" content="Expressing my thoughts here." />
+<link rel="canonical" href="https://vikassharma.me/v1/how-to-solve-sliding-window-problems/" />
+<meta property="og:url" content="https://vikassharma.me/v1/how-to-solve-sliding-window-problems/" />
+<meta property="og:site_name" content="Vikas Sharma" />
+<meta property="og:image" content="https://vikassharma.me/v1/assets/images/sliding-window-banner.jpeg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-10-25T02:42:00-05:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://vikassharma.me/v1/assets/images/sliding-window-banner.jpeg" />
+<meta property="twitter:title" content="How to solve Sliding Window Problems" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Vikas Sharma"},"dateModified":"2023-10-25T02:42:00-05:00","datePublished":"2023-10-25T02:42:00-05:00","description":"Expressing my thoughts here.","headline":"How to solve Sliding Window Problems","image":"https://vikassharma.me/v1/assets/images/sliding-window-banner.jpeg","mainEntityOfPage":{"@type":"WebPage","@id":"https://vikassharma.me/v1/how-to-solve-sliding-window-problems/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://vikassharma.me/v1/assets/images/android-chrome-512x512.png"},"name":"Vikas Sharma"},"url":"https://vikassharma.me/v1/how-to-solve-sliding-window-problems/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="/v1/assets/css/screen.css" rel="stylesheet">
+    <link href="/v1/assets/css/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="/v1/assets/js/jquery.min.js"></script>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WC7F9C2X');</script>
+    <!-- End Google Tag Manager -->
+</head>
+
+
+
+
+
+<body class="layout-post">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WC7F9C2X"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- defer loading of font and font awesome -->
+    <noscript id="deferred-styles">
+        <link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i"
+            rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+            integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    </noscript>
+
+
+    <!-- Begin Menu Navigation
+================================================== -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+
+        <div class="container pr-0">
+
+            <!-- Begin Logo -->
+            <a class="navbar-brand" href="/v1/">
+                <img src="/v1/assets/images/android-chrome-512x512.png" alt="vikassharma.me">
+                vikassharma.me
+            </a>
+            <!-- End Logo -->
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMediumish">
+
+                <!-- Begin Menu -->
+                <ul class="navbar-nav ml-auto">
+
+                    
+                    <li class="nav-item">
+                    
+                        <a class="nav-link" href="/v1/">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/v1/blog">Blog</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/v1/about">About</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/v1/resume">Resume</a>
+                    </li>
+
+                    <script src="/v1/assets/js/lunr.js"></script>
+
+
+<style>
+    .lunrsearchresult .title {color: #d9230f;}
+    .lunrsearchresult .url {color: silver;}
+    .lunrsearchresult a {display: block; color: #777;}
+    .lunrsearchresult a:hover, .lunrsearchresult a:focus {text-decoration: none;}
+    .lunrsearchresult a:hover .title {text-decoration: underline;}
+</style>
+
+
+<form class="bd-search" onSubmit="return lunr_search(document.getElementById('lunrsearch').value);">
+    <input type="text" class="form-control text-small launch-modal-search" id="lunrsearch" name="q" maxlength="255" value="" placeholder="Type and enter..."/>
+</form>
+
+<div id="lunrsearchresults">
+    <ul></ul>
+</div>
+
+<script src="/v1/assets/js/lunrsearchengine.js"></script>
+
+                </ul>
+                <!-- End Menu -->
+
+            </div>
+
+        </div>
+    </nav>
+    <!-- End Navigation
+================================================== -->
+
+    <div class="site-content">
+
+        <div class="container">
+
+            <!-- Site Title
+================================================== -->
+            <!-- <div class="mainheading">
+                <h1 class="sitetitle">vikassharma.me</h1>
+                <p class="lead">
+                    Expressing my thoughts here.
+                </p>
+            </div> -->
+
+            <!-- Content
+================================================== -->
+            <div class="main-content">
+                <!-- Begin Article
+================================================== -->
+<div class="container">
+    <div class="row">
+
+        <!-- Post Share -->
+        <div class="col-md-2 pl-0">
+            <div class="share sticky-top sticky-top-offset">
+    <p>
+        Share
+    </p>
+    <ul>
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://twitter.com/intent/tweet?text=How to solve Sliding Window Problems&url=https://vikassharma.me/v1/how-to-solve-sliding-window-problems/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://facebook.com/sharer.php?u=https://vikassharma.me/v1/how-to-solve-sliding-window-problems/" onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=https://vikassharma.me/v1/how-to-solve-sliding-window-problems/" onclick="window.open(this.href, 'width=550,height=435');return false;">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+        </li>
+
+    </ul>
+    
+    <div class="sep">
+    </div>
+    <ul>
+        <li>
+        <a class="small smoothscroll" href="#disqus_thread"></a>
+        </li>
+    </ul>
+    
+</div>
+
+        </div>
+
+        <!-- Post -->
+        <div class="col-md-9 flex-first flex-md-unordered">
+            <div class="mainheading">
+
+                <!-- Post Title -->
+                <h1 class="posttitle">How to solve Sliding Window Problems</h1>
+
+            </div>
+
+            <!-- Adsense if enabled from _config.yml (change your pub id and slot) -->
+            
+            <!-- End Adsense -->
+
+            <!-- Post Featured Image -->
+            
+
+            
+            <img class="featured-image img-fluid lazyimg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" data-src="/v1/assets/images/sliding-window-banner.jpeg" alt="How to solve Sliding Window Problems">
+            
+
+            
+            <!-- End Featured Image -->
+
+            <!-- Post Content -->
+            <div class="article-post">
+                <!-- Toc if any -->
+                
+                <!-- End Toc -->
+                <meta name="twitter:card" content="summary_large_image" />
+
+<meta name="twitter:site" content="@i_vikassharma" />
+
+<meta name="twitter:creator" content="@i_vikassharma" />
+
+<meta name="twitter:title" content="How to solve Sliding Window Problems?" />
+
+<meta name="twitter:description" content="A comprehensive guide to solving problems with the Sliding Window Technique. Learn the fundamentals and real-world applications. #SlidingWindow #ProblemSolving" />
+
+<meta name="twitter:image" content="https://vikassharma.me/assets/images/sliding-window-banner.jpeg" />
+
+<h2 id="table-of-contents">Table of Contents</h2>
+
+<ul>
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#how-do-you-identify-them">How do you identify them?</a></li>
+  <li><a href="#general-mental-model">General Mental Model</a>
+    <ul>
+      <li><a href="#1-expand">1. Expand</a></li>
+      <li><a href="#2-shrink">2. Shrink</a></li>
+      <li><a href="#3-record-the-candidate-result">3. Record the Candidate Result</a></li>
+    </ul>
+  </li>
+  <li><a href="#code-template">Code Template</a></li>
+  <li><a href="#problem-statement">Problem Statement</a></li>
+  <li><a href="#explanation-and-solution">Explanation and Solution</a></li>
+  <li><a href="#types">Types</a>
+    <ul>
+      <li><a href="#fixed-size-window">Fixed Size Window</a></li>
+      <li><a href="#variable-size-window">Variable Size Window</a>
+        <ul>
+          <li><a href="#1-left-catches-up-with-right">1. Left Catches Up with Right</a></li>
+          <li><a href="#2-multiple-possible-lefts">2. Multiple Possible Lefts</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#difference-from-other-general-optimizations">Difference from Other General Optimizations</a></li>
+  <li><a href="#where-not-to-apply-sliding-window-technique">Where Not to Apply Sliding Window Technique</a></li>
+  <li><a href="#conclusion">Conclusion</a></li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+
+<p><strong>Sliding window</strong> is a common technique/pattern used to solve many different problems in computer science. In fact, its one of the most frequently asked type of problem during software engineering interviews.</p>
+
+<p>This blog post aims to provide clarity about these kind of questions and also aid the readers with necessary tools (mental model and coding templates) needed to efficiently solve the problems involving this technique.</p>
+
+<h2 id="how-do-you-identify-them">How do you identify them?</h2>
+
+<p>There are a few key things to look for when identifying problems where the sliding window technique can be applied:</p>
+
+<ol>
+  <li>The problem involves a <strong>sequence of data points</strong> such as arrays, list of elements or string.</li>
+  <li>Problem is specifically asking about <strong>finding some subrange</strong> in that array/string, like a longest, shortest or target value.</li>
+  <li>There is a <strong>constraint on the size of the window</strong>. Sometimes, it’s as simple as being clearly mentioned as “k-sized window” or little more abstract in nature like “longest substring without repeating characters”.</li>
+</ol>
+
+<h2 id="general-mental-model">General mental model</h2>
+
+<p>At the very fundamental level, sliding window technique involves:</p>
+
+<ol>
+  <li>Dividing a sequence of data points into overlapping subsets of fixed size (or variable size based on certain constraint on the window size), and then performing some operation on each subset.</li>
+  <li>The window is then moved one position to the right, and the operation is performed on the new subset.</li>
+  <li>This process is repeated until the window reaches the end of the sequence.</li>
+</ol>
+
+<p>Let’s try to formalise these fundamental steps as follows:</p>
+<h3 id="1-expand">1. Expand</h3>
+<p>As the name suggests, in this step we are just trying to expand the window being observed at the right end. While there are few different ways to do that, let’s stick with good old <code class="language-plaintext highlighter-rouge">for</code> loop at the moment. We’ll call our iterator as <code class="language-plaintext highlighter-rouge">right</code> to mimic the right end of our conceptual window (Sliding window: well it slides on the ends, so nothing fancy)</p>
+
+<h3 id="2-shrink">2. Shrink</h3>
+<p>As we discussed earlier, there would be some kind of constraint on the size of the window. This constraint can simply be a constraint of let’s say “k-sized window” or little more abstract in nature like “longest substring without repeating characters”. Essentially this constraint/condition will help us to evaluate the validity of the window being observed.
+This particular step just refers to the action of shrinking the window from its left end towards right so that we can maintain the valid window (that satisfies the constraint on size)</p>
+
+<h3 id="3-record-the-candidate-result">3. Record the candidate result</h3>
+<p>Once we have a valid window, then all that is left for us is to record the candidate result from the window being observed. In most of the cases, we’ll have no benefit of storing all the possible results in memory. Instead, we’ll often store the best-result-so-far and keep on comparing this so called best-result-so-far with next candidate result of any future windows.</p>
+
+<p>Following template captures the above idea at a high level</p>
+<h3 id="code-template">Code template</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="rouge-code"><pre><span class="k">def</span> <span class="nf">fn</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+    <span class="n">left</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">cur_win</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">right</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)):</span>
+	    <span class="c1"># 1. Expand
+</span>        <span class="c1"># do logic here to add arr[right] to curr_win
+</span>
+		  <span class="c1"># 2. Shrink
+</span>        <span class="k">while</span> <span class="n">WINDOW_CONDITION_BROKEN</span><span class="p">:</span>
+            <span class="c1"># keep removing arr[left] from curr_win 
+</span>            <span class="c1"># until it is a valid window again
+</span>            <span class="n">left</span> <span class="o">+=</span> <span class="mi">1</span>
+
+		  <span class="c1"># 3. Record the candidate result
+</span>        <span class="c1"># update result
+</span>    
+    <span class="k">return</span> <span class="n">result</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Let’s quickly solve a simple problem using sliding window pattern to reinforce our learning.</p>
+
+<h3 id="problem-statement">Problem statement</h3>
+
+<p>You are given an array <code class="language-plaintext highlighter-rouge">prices</code> where <code class="language-plaintext highlighter-rouge">prices[i]</code> is the price of a given stock on the <code class="language-plaintext highlighter-rouge">i-th</code> day.</p>
+
+<p>You want to maximize your profit by choosing a <strong>single day</strong> to buy one stock and choosing a <strong>different day in the future</strong> to sell that stock.</p>
+
+<p>Return <em>the maximum profit you can achieve from this transaction</em>. If you cannot achieve any profit, return <code class="language-plaintext highlighter-rouge">0</code>.</p>
+
+<p><strong>Example 1:</strong></p>
+
+<p><strong>Input:</strong> prices = [7,1,5,3,6,4]<br />
+<strong>Output:</strong> 5</p>
+
+<p><strong>Explanation:</strong> Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
+Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell.</p>
+
+<p><strong>Example 2:</strong></p>
+
+<p><strong>Input:</strong> prices = [7,6,4,3,1]<br />
+<strong>Output:</strong> 0</p>
+
+<p><strong>Explanation:</strong> In this case, no transactions are done and the max profit = 0.</p>
+
+<h3 id="explanation-and-solution">Explanation and Solution</h3>
+
+<ul>
+  <li>We fix a buy price, in this case <code class="language-plaintext highlighter-rouge">index=0</code>.</li>
+  <li>We start with <code class="language-plaintext highlighter-rouge">index=0</code> and start expanding with the next possible selling price.</li>
+  <li>For each potential selling price, we check if this window is still profitable i.e. <code class="language-plaintext highlighter-rouge">prices[sell] &gt;= prices[buy]</code>. If that’s not the case, then it means that we can do better in terms of selecting our buy price.</li>
+  <li>Therefore, we move our buy price pointer to sell price directly (as we would have processed all intermediate cases already).</li>
+  <li>This problem is of category <a href="#1-left-catches-up-with-right">Left catches up with right</a> explained later in this post.</li>
+  <li>Following code implements this logic for more clarity.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre><span class="k">def</span> <span class="nf">maxProfit</span><span class="p">(</span><span class="n">prices</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+	<span class="n">buy</span><span class="p">,</span> <span class="n">maxProfit</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+	<span class="k">for</span> <span class="n">sell</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">prices</span><span class="p">)):</span>
+		<span class="c1"># Expand
+</span>		<span class="c1"># no action needed - we are just expanding our observed window
+</span>    <span class="c1"># by one potential selling price at a time
+</span>		
+		<span class="c1"># Shrink
+</span>		<span class="k">if</span> <span class="n">prices</span><span class="p">[</span><span class="n">sell</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">prices</span><span class="p">[</span><span class="n">buy</span><span class="p">]:</span>
+			<span class="n">buy</span> <span class="o">=</span> <span class="n">sell</span>
+		
+		<span class="c1"># Record candidate result and compare it against best we got so far
+</span>		<span class="n">maxProfit</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">maxProfit</span><span class="p">,</span> <span class="n">prices</span><span class="p">[</span><span class="n">sell</span><span class="p">]</span><span class="o">-</span><span class="n">prices</span><span class="p">[</span><span class="n">buy</span><span class="p">])</span>
+
+<span class="k">return</span> <span class="n">maxProfit</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<h2 id="types">Types</h2>
+<h3 id="fixed-size-window">Fixed size window</h3>
+
+<p><strong>Example(s)</strong>:</p>
+<ul>
+  <li><a href="https://leetcode.com/problems/sliding-window-maximum/description/" target="_blank">Sliding window maximum</a></li>
+</ul>
+
+<h3 id="variable-size-window">Variable size window</h3>
+<h4 id="1-left-catches-up-with-right">1. Left catches up with right</h4>
+
+<p><strong>Example(s)</strong>:</p>
+<ul>
+  <li><a href="https://vikassharma.me/leetcode-121-best-time-to-buy-and-sell-stock/" target="_blank">Best time to buy and sell stock</a></li>
+  <li><a href="https://leetcode.com/problems/longest-repeating-character-replacement" target="_blank">Longest repeating character replacement</a></li>
+  <li><a href="https://leetcode.com/problems/permutation-in-string/" target="_blank">Permutation in string</a></li>
+</ul>
+
+<h4 id="2-multiple-possible-lefts">2. Multiple possible lefts</h4>
+
+<p><strong>Example(s)</strong>:</p>
+<ul>
+  <li><a href="https://leetcode.com/problems/longest-substring-without-repeating-characters/" target="_blank">Longest substring without repeating characters</a></li>
+  <li><a href="https://leetcode.com/problems/minimum-window-substring/description/" target="_blank">Minimum window substring</a></li>
+</ul>
+
+<h2 id="difference-from-other-general-optimizations">Difference from other general optimizations</h2>
+
+<p>The sliding window technique offers a specific approach to problem-solving, distinct from other general optimization strategies. It excels in scenarios where you need to efficiently analyze a subset of data. While dynamic programming and other techniques have their strengths, sliding windows are particularly valuable when processing data sequentially.
+Also, there has to be a constraint on window size. Otherwise, we won’t be able to shrink or expand window linearly.</p>
+
+<h2 id="where-not-to-apply-sliding-window-technique">Where not to apply Sliding Window technique</h2>
+
+<p>While the sliding window technique is a versatile tool, it’s not always the best choice. Avoid using it in situations where the problem’s requirements do not align with the window concept or when alternative strategies, such as hash tables or prefix sums, are more efficient.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>In the realm of problem-solving, the sliding window technique stands as a versatile and efficient approach, particularly when dealing with sequences of data. This blog post has shed light on the fundamental principles behind this technique, from identifying suitable problems to constructing a code template for implementation.</p>
+
+<p>The key takeaways are:</p>
+
+<ul>
+  <li>The sliding window technique involves dividing a sequence into overlapping subsets and iteratively performing operations on these subsets.</li>
+  <li>It excels in scenarios with constraints on window size, such as finding the longest substring without repeating characters or analyzing stock price trends.</li>
+  <li>While sliding windows offer a powerful strategy, remember that it’s not a one-size-fits-all solution. Be mindful of situations where alternative techniques like hash tables or dynamic programming might be more effective.</li>
+</ul>
+
+<p>By mastering the sliding window technique and recognizing when to apply it, you’ll add a valuable tool to your problem-solving toolkit, making those tricky software engineering interview questions a breeze. So go ahead, slide through those problems and unlock solutions with ease!</p>
+
+            </div>
+
+            <!-- Rating -->
+            
+
+            <!-- Post Date -->
+            <p>
+            <small>
+                <span class="post-date"><time class="post-date" datetime="2023-10-25">25 Oct 2023</time></span>           
+                
+                </small>
+            </p>
+
+            <!-- Post Categories -->
+            <div class="after-post-cats">
+                <ul class="tags mb-4">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/v1/categories#technical">technical</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Categories -->
+
+            <!-- Post Tags -->
+            <div class="after-post-tags">
+                <ul class="tags">
+                    
+                    
+                </ul>
+            </div>
+            <!-- End Tags -->
+
+            <!-- Prev/Next -->
+            <div class="row PageNavigation d-flex justify-content-between font-weight-bold">
+            
+            <a class="prev d-block col-md-6" href="/v1/browser-extensions-that-i-use-in-2023/"> &laquo; Browser extensions that I use in 2023</a>
+            
+            
+            <a class="next d-block col-md-6 text-lg-right" href="/v1/vagde-paani/">ਵਗਦੇ ਪਾਣੀ &raquo; </a>
+            
+            <div class="clearfix"></div>
+            </div>
+            <!-- End Categories -->
+
+        </div>
+        <!-- End Post -->
+
+    </div>
+</div>
+<!-- End Article
+================================================== -->
+
+<!-- Begin Comments
+================================================== -->
+
+    <div class="container">
+        <div id="comments" class="row justify-content-center mb-5">
+            <div class="col-md-8">
+                <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'vikassharma-me'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+            </div>
+        </div>
+    </div>
+
+<!--End Comments
+================================================== -->
+
+<!-- Review with LD-JSON, adapt it for your needs if you like, but make sure you test the generated HTML source code first: 
+https://search.google.com/structured-data/testing-tool/u/0/
+================================================== -->
+
+            </div>
+
+            
+
+        </div>
+
+        <!-- Categories Jumbotron
+================================================== -->
+        <div class="jumbotron fortags">
+            <div class="d-md-flex h-100">
+                <div class="col-md-4 transpdark align-self-center text-center h-100">
+                    <div class="d-md-flex align-items-center justify-content-center h-100">
+                        <h2 class="d-md-block align-self-center py-1 font-weight-light">Explore <span
+                                class="d-none d-md-inline">→</span></h2>
+                    </div>
+                </div>
+                <div class="col-md-8 p-5 align-self-center text-center">
+                    
+                    
+                    
+                    <a class="mt-1 mb-1"
+                        href="/v1/categories#personal">personal (2)</a>
+                    
+                    <a class="mt-1 mb-1"
+                        href="/v1/categories#first-post">first-post (1)</a>
+                    
+                    <a class="mt-1 mb-1"
+                        href="/v1/categories#technical">technical (7)</a>
+                    
+                    <a class="mt-1 mb-1"
+                        href="/v1/categories#leetcode">leetcode (2)</a>
+                    
+                    <a class="mt-1 mb-1"
+                        href="/v1/categories#blind-75">blind-75 (2)</a>
+                    
+                    <a class="mt-1 mb-1"
+                        href="/v1/categories#sliding-window">sliding-window (1)</a>
+                    
+                    <a class="mt-1 mb-1"
+                        href="/v1/categories#frontend">frontend (1)</a>
+                    
+                    <a class="mt-1 mb-1"
+                        href="/v1/categories#poem">poem (2)</a>
+                    
+                    <a class="mt-1 mb-1"
+                        href="/v1/categories#sticky-notes">sticky-notes (14)</a>
+                    
+                    <a class="mt-1 mb-1"
+                        href="/v1/categories#requests-sticky-notes">requests-sticky-notes (12)</a>
+                    
+                    <a class="mt-1 mb-1"
+                        href="/v1/categories#til">til (1)</a>
+                    
+                    
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- Begin Footer
+================================================== -->
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                        Copyright © 2026 vikassharma.me
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- End Footer
+================================================== -->
+
+    </div> <!-- /.site-content -->
+
+    <!-- Scripts
+================================================== -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+    <script src="/v1/assets/js/mediumish.js"></script>
+    
+    <script src="/v1/assets/js/lazyload.js"></script>
+    
+    <script src="/v1/assets/js/ie10-viewport-bug-workaround.js"></script>
+    
+    <script id="dsq-count-scr" src="//vikassharma-me.disqus.com/count.js"></script>
+    
+
+</body>
+
+</html>
