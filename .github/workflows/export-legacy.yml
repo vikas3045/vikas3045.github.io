@@ -1,0 +1,29 @@
+name: Export Legacy Site
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build_and_export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'  # ✅ Confirmed compatible with github-pages v227
+          bundler-cache: true  # Automatically runs 'bundle install' and caches gems
+
+      - name: Build Site for Subdirectory
+        # The baseurl flag forces all links to look like /v1/assets/style.css
+        run: |
+          bundle exec jekyll build --baseurl /v1
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: legacy-site-v1
+          path: _site/
+          retention-days: 1
