@@ -19,7 +19,7 @@ const getPublicImagePath = (imgPath: string) => {
   return imgPath; // Return as is if not matching pattern
 };
 ---
-<article>
+<article data-pagefind-body>
     {image && (
         <img
             src={getPublicImagePath(image)}
@@ -28,7 +28,7 @@ const getPublicImagePath = (imgPath: string) => {
             loading="lazy"
         />
     )}
-    <h1>{title}</h1>
+    <h1 data-pagefind-meta="title">{title}</h1>
     {date && <FormattedDate date={date} />}
     <CategoryLinks categories={categories} />
     <hr>

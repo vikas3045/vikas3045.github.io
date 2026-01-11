@@ -1,6 +1,7 @@
 ---
 // src/components/BlogList.astro
 import FormattedDate from './FormattedDate.astro';
+import { parseInlineMarkdown } from '../utils/markdown';
 const { posts } = Astro.props;
 ---
 <section>
@@ -10,7 +11,7 @@ const { posts } = Astro.props;
       <li>
         <FormattedDate date={entry.data.date} />
         <a href={`/${entry.slug.replace(/^\d{4}-\d{2}-\d{2}-/, '')}`}>
-          <span class="title">{entry.data.title}</span>
+          <span class="title" set:html={parseInlineMarkdown(entry.data.title)} />
         </a>
         {entry.data.description && <p>{entry.data.description}</p>}
       </li>
