@@ -1,0 +1,100 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PagefindSearch from 'astro-pagefind/components/Search';
+---
+
+<Layout title="Search" description="Search the blog">
+  <section>
+    <h1>Search</h1>
+    <PagefindSearch id="search" className="pagefind-ui" uiOptions={{ showImages: false }} />
+  </section>
+</Layout>
+
+<style is:global>
+  :root {
+    --pagefind-ui-scale: 0.8;
+    --pagefind-ui-primary: var(--link-color);
+    --pagefind-ui-text: var(--text-color);
+    --pagefind-ui-background: var(--background-color);
+    --pagefind-ui-border: var(--text-color);
+    --pagefind-ui-tag: var(--code-background-color);
+    --pagefind-ui-font: var(--font-secondary);
+  }
+
+  /* Reset Pagefind's widget-like styling */
+  .pagefind-ui .pagefind-ui__drawer {
+    gap: 0;
+  }
+
+  .pagefind-ui .pagefind-ui__result {
+    border: none;
+    padding: 1rem 0;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  /* Match the blog list's dashed/solid separators */
+  @media (prefers-color-scheme: dark) {
+    .pagefind-ui .pagefind-ui__result {
+      border-bottom-color: #444;
+    }
+  }
+
+  .pagefind-ui .pagefind-ui__result-title,
+  .pagefind-ui .pagefind-ui__result-link {
+    font-weight: normal !important;
+    text-decoration: underline !important;
+    color: var(--link-color) !important;
+    font-size: 1rem !important;
+  }
+
+  .pagefind-ui .pagefind-ui__result-excerpt {
+    font-size: 0.9rem !important;
+    color: var(--text-color) !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Style the search input to be minimalist */
+  .pagefind-ui .pagefind-ui__search-input {
+    border: 1px solid var(--text-color) !important;
+    border-radius: 0 !important;
+    background-color: transparent !important;
+    color: var(--text-color) !important;
+    padding: 0.5rem !important;
+    padding-left: 2.5rem !important; /* Fix for icon overlap */
+  }
+
+  .pagefind-ui .pagefind-ui__search-clear {
+    background-color: var(--code-background-color) !important;
+    border-radius: 0 !important;
+    color: var(--text-color) !important;
+  }
+
+  .pagefind-ui .pagefind-ui__message {
+    padding: 1rem 0 !important;
+    font-weight: normal !important;
+    font-family: monospace;
+    font-size: 0.9rem;
+  }
+
+  /* Hide metadata like date/author if they appear and don't match style */
+  .pagefind-ui .pagefind-ui__result-meta {
+      display: none !important;
+  }
+
+  /* Button styling */
+  .pagefind-ui .pagefind-ui__button {
+      border-radius: 0 !important;
+      border: 1px solid var(--text-color) !important;
+      background: transparent !important;
+      color: var(--text-color) !important;
+      margin-top: 1rem !important;
+  }
+
+  /* Adjust icon position to match the new padding */
+  .pagefind-ui .pagefind-ui__search-input::before {
+      left: 0.8rem !important;
+  }
+</style>
