@@ -113,7 +113,7 @@ jobs:
       - name: Commit and Push New Post and Images
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "docs(blog): add post and images from issue #${{ github.event.issue.number }}"
+          commit_message: "add post ${{ github.event.issue.title }} from issue #${{ github.event.issue.number }}"
           # Track both the new markdown and any new images in public/assets/blog
           file_pattern: "src/content/blog/*.md public/assets/blog/**"
 
