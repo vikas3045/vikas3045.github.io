@@ -30,7 +30,7 @@ I am not trying to copy athletes or monks; I am **borrowing their constraints**.
 
 Verse from Gita ji:
 
-"र्मण्येवाधिकारस्ते मा फलेषु कदाचन |
+"र्मण्येवाधिकारस्ते मा फलेषु कदाचन |<br/>
 मा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि || २-४७ ||"
 
 (Literal gist): Your right is to the action alone, never to the fruits of action; let not the fruits be your motive, and do not be attached to inaction.
