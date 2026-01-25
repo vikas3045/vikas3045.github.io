@@ -17,6 +17,7 @@ Less _what am I trying_, more _who am I becoming_.
 
 ## 1. I am a disciplined observer of my own life
 Idea: Journal everything extensively
+
 By the end of 2026
 - I have a searchable personal knowledge base of thoughts, decisions, emotions, and experiments.
 
@@ -30,8 +31,8 @@ I am not trying to copy athletes or monks; I am **borrowing their constraints**.
 
 Verse from Gita ji:
 
-"र्मण्येवाधिकारस्ते मा फलेषु कदाचन |<br/>
-मा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि || २-४७ ||"
+**"र्मण्येवाधिकारस्ते मा फलेषु कदाचन |<br/>
+मा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि || २-४७ ||"**
 
 (Literal gist): Your right is to the action alone, never to the fruits of action; let not the fruits be your motive, and do not be attached to inaction.
 
@@ -43,13 +44,15 @@ By the end of 2026
 
 ## 3. I am a calm, high-leverage professional
 Idea: Non-emotional at work + technical depth
+
 By the end of 2026
 - I respond, not react. (I give myself time to remove emotional reactivity and prioritise clarity)
 - I am known for clarity, not urgency
 - I compound technical skill quietly and consistently
 
 ## 4. I am a builder-in-public
-Idea: Blog / learning-in-public / vlog
+Idea: Blog / learning-in-public / vlog (not sure at the moment)
+
 By the end of 2026
 - My thinking is documented enough that opportunities find me
 - I have visible proof-of-work and a track record of finishing projects
@@ -57,6 +60,7 @@ By the end of 2026
 
 ## 5. I am designing my future, not drifting into it
 Idea: Be deliberate about life-choices
+
 By the end of 2026
 - I've prioritised research, outreach and prototyping
 - I've clarity on next-steps, even if the answer is "not yet"
