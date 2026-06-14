@@ -29,114 +29,21 @@ jobs:
       - name: Install dependencies
         run: pip install requests
 
-      - name: Create Post and Ingest Images
+      - name: Create Content and Ingest Images
         id: create_file
         env:
           ISSUE_TITLE: ${{ github.event.issue.title }}
           ISSUE_BODY: ${{ github.event.issue.body }}
           ISSUE_LABELS: ${{ toJson(github.event.issue.labels) }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
-        run: |
-          python3 -c '
-          import os, re, datetime, json, requests, uuid, sys
-          from pathlib import Path
-
-          # 1. Setup Data & Env
-          title = os.environ.get("ISSUE_TITLE", "Untitled")
-          body = os.environ.get("ISSUE_BODY", "")
-          labels = json.loads(os.environ.get("ISSUE_LABELS", "[]"))
-          issue_number = os.environ.get("ISSUE_NUMBER", "unknown")
-          
-          # 2. Extract Tags (Filter out "publish" and preserve label order)
-          tags = []
-          for label in labels:
-              name = label["name"]
-              if name != "publish" and name not in tags:
-                  tags.append(name)
-          
-          # 3. Create Slug and Date
-          slug = re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-")
-          if not slug:
-              slug = f"issue-{issue_number}"
-          date_str = datetime.datetime.now().strftime("%Y-%m-%d")
-
-          post_dir = Path("src/content/blog")
-          for existing_post in post_dir.glob("*.md"):
-              existing_slug = re.sub(r"^\d{4}-\d{2}-\d{2}-", "", existing_post.stem)
-              if existing_slug == slug:
-                  print(f"Refusing to overwrite existing post URL slug: {slug}")
-                  print(f"Existing file: {existing_post}")
-                  sys.exit(1)
-          
-          # 4. Image Ingestion Logic
-          # Regex matches GitHub asset/image URLs
-          asset_regex = r"https://github\.com/(?:user-attachments/assets|user-images)/[a-zA-Z0-9\-/]+"
-          found_urls = re.findall(asset_regex, body)
-          
-          # Create image directory for this post
-          img_rel_dir = f"assets/blog/{slug}"
-          img_abs_dir = os.path.join("public", img_rel_dir)
-          os.makedirs(img_abs_dir, exist_ok=True)
-
-          for url in found_urls:
-              try:
-                  print(f"Downloading {url}...")
-                  res = requests.get(url, stream=True, timeout=10)
-                  if res.status_code == 200:
-                      # Determine extension
-                      content_type = res.headers.get("Content-Type", "")
-                      ext = ".png"
-                      if "image/jpeg" in content_type: ext = ".jpg"
-                      elif "image/webp" in content_type: ext = ".webp"
-                      elif "image/gif" in content_type: ext = ".gif"
-                      
-                      img_name = f"img-{uuid.uuid4().hex[:8]}{ext}"
-                      img_path = os.path.join(img_abs_dir, img_name)
-                      
-                      with open(img_path, "wb") as f:
-                          for chunk in res.iter_content(1024):
-                              f.write(chunk)
-                      
-                      # Replace URL in body with local path for Astro
-                      local_url = f"/{img_rel_dir}/{img_name}"
-                      body = body.replace(url, local_url)
-              except Exception as e:
-                  print(f"Failed to ingest {url}: {e}")
-
-          # 5. Construct Markdown File
-          filename = post_dir / f"{date_str}-{slug}.md"
-          if filename.exists():
-              print(f"Refusing to overwrite existing post file: {filename}")
-              sys.exit(1)
-
-          # Frontmatter uses json.dumps to handle escaping correctly
-          file_content = f"""---
-          title: {json.dumps(title)}
-          date: "{date_str}"
-          description: ""
-          tags: {json.dumps(tags)}
-          categories: {json.dumps(tags)}
-          ---
-
-          {body}
-          """
-
-          # 6. Save File
-          os.makedirs(filename.parent, exist_ok=True)
-          with open(filename, "w", encoding="utf-8") as f:
-              f.write(file_content)
-
-          # 7. Set Output
-          with open(os.environ["GITHUB_OUTPUT"], "a") as gh_out:
-              gh_out.write(f"filename={filename}\n")
-          '
+        run: python3 .github/scripts/publish_issue.py
 
       - name: Commit and Push New Post and Images
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "add post ${{ github.event.issue.title }} from issue #${{ github.event.issue.number }}"
-          # Track both the new markdown and any new images in public/assets/blog
-          file_pattern: "src/content/blog/*.md public/assets/blog/**"
+          commit_message: "publish ${{ github.event.issue.title }} from issue #${{ github.event.issue.number }}"
+          # Track generated markdown and any ingested issue images.
+          file_pattern: "src/content/blog/*.md src/content/flashcards/*.md public/assets/blog/** public/assets/flashcards/**"
 
       - name: Close Issue
         uses: actions/github-script@v7
