@@ -43,7 +43,7 @@ jobs:
         with:
           commit_message: "publish ${{ github.event.issue.title }} from issue #${{ github.event.issue.number }}"
           # Track generated markdown and any ingested issue images.
-          file_pattern: "src/content/blog/*.md src/content/flashcards/*.md public/assets/blog/** public/assets/flashcards/**"
+          file_pattern: "src/content/blog src/content/flashcards public/assets/blog public/assets/flashcards"
 
       - name: Close Issue
         uses: actions/github-script@v7
