@@ -1,12 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import PagefindSearch from 'astro-pagefind/components/Search';
+import PagefindSearch from 'astro-pagefind/components/Search.astro';
 ---
 
 <Layout title="Search" description="Search the blog">
   <section>
     <h1>Search</h1>
-    <PagefindSearch id="search" className="pagefind-ui" uiOptions={{ showImages: false }} />
+    <PagefindSearch className="pagefind-ui" searchboxOptions={{ showImages: false }} />
   </section>
 </Layout>
 

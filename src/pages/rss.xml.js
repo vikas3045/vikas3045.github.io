@@ -1,6 +1,7 @@
 import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
 import { SITE_TITLE } from '../consts';
+import { getPostSlug } from '../utils/posts';
 
 function cleanMarkdown(text) {
 	return text
@@ -27,7 +28,7 @@ export async function GET(context) {
 			title: post.data.title,
 			pubDate: post.data.date,
 			description: post.data.description || cleanMarkdown(post.body),
-			link: `/${post.slug.replace(/^\d{4}-\d{2}-\d{2}-/, '')}/`,
+			link: `/${getPostSlug(post)}/`,
 		})),
 	});
 }

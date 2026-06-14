@@ -1,18 +1,19 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import PostLayout from '../components/PostLayout.astro';
+import { getPostSlug } from '../utils/posts';
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('blog');
   return blogEntries.map(entry => ({
-    params: { slug: entry.slug.replace(/^\d{4}-\d{2}-\d{2}-/, '') },
+    params: { slug: getPostSlug(entry) },
     props: { entry },
   }));
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 
 const heroImage = entry.data.image 
   ? (entry.data.image.startsWith('assets/images/') 
