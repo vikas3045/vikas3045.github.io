@@ -8,10 +8,10 @@ on:
 jobs:
   create_post:
     runs-on: ubuntu-latest
-    # Only run if 'publish' label is added by the repo owner
+    # Only run when the repo owner adds the 'publish' label.
     if: |
-      contains(github.event.issue.labels.*.name, 'publish') &&
-      github.event.issue.user.login == github.repository_owner
+      github.event.label.name == 'publish' &&
+      github.event.sender.login == github.repository_owner
 
     permissions:
       contents: write
@@ -35,21 +35,38 @@ jobs:
           ISSUE_TITLE: ${{ github.event.issue.title }}
           ISSUE_BODY: ${{ github.event.issue.body }}
           ISSUE_LABELS: ${{ toJson(github.event.issue.labels) }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
         run: |
           python3 -c '
-          import os, re, datetime, json, requests, uuid
+          import os, re, datetime, json, requests, uuid, sys
+          from pathlib import Path
 
           # 1. Setup Data & Env
           title = os.environ.get("ISSUE_TITLE", "Untitled")
           body = os.environ.get("ISSUE_BODY", "")
           labels = json.loads(os.environ.get("ISSUE_LABELS", "[]"))
+          issue_number = os.environ.get("ISSUE_NUMBER", "unknown")
           
-          # 2. Extract Tags (Filter out "publish")
-          tags = [l["name"] for l in labels if l["name"] != "publish"]
+          # 2. Extract Tags (Filter out "publish" and preserve label order)
+          tags = []
+          for label in labels:
+              name = label["name"]
+              if name != "publish" and name not in tags:
+                  tags.append(name)
           
           # 3. Create Slug and Date
           slug = re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-")
+          if not slug:
+              slug = f"issue-{issue_number}"
           date_str = datetime.datetime.now().strftime("%Y-%m-%d")
+
+          post_dir = Path("src/content/blog")
+          for existing_post in post_dir.glob("*.md"):
+              existing_slug = re.sub(r"^\d{4}-\d{2}-\d{2}-", "", existing_post.stem)
+              if existing_slug == slug:
+                  print(f"Refusing to overwrite existing post URL slug: {slug}")
+                  print(f"Existing file: {existing_post}")
+                  sys.exit(1)
           
           # 4. Image Ingestion Logic
           # Regex matches GitHub asset/image URLs
@@ -87,7 +104,11 @@ jobs:
                   print(f"Failed to ingest {url}: {e}")
 
           # 5. Construct Markdown File
-          filename = f"src/content/blog/{date_str}-{slug}.md"
+          filename = post_dir / f"{date_str}-{slug}.md"
+          if filename.exists():
+              print(f"Refusing to overwrite existing post file: {filename}")
+              sys.exit(1)
+
           # Frontmatter uses json.dumps to handle escaping correctly
           file_content = f"""---
           title: {json.dumps(title)}
@@ -101,7 +122,7 @@ jobs:
           """
 
           # 6. Save File
-          os.makedirs(os.path.dirname(filename), exist_ok=True)
+          os.makedirs(filename.parent, exist_ok=True)
           with open(filename, "w", encoding="utf-8") as f:
               f.write(file_content)
 
