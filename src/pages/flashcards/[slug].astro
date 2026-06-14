@@ -1,0 +1,122 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import 'katex/dist/katex.min.css';
+import {
+  getDeckSlug,
+  parseFlashcards,
+  renderInlineMarkdown,
+  renderMarkdown,
+} from '../../utils/flashcards';
+
+export async function getStaticPaths() {
+  const deckEntries = await getCollection('flashcards');
+  return deckEntries.map((entry) => ({
+    params: { slug: getDeckSlug(entry.id || entry.slug) },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const deck = parseFlashcards(entry.body);
+const deckTags = entry.data.tags || [];
+const renderedSections = await Promise.all(deck.sections.map(async (section) => ({
+  ...section,
+  cards: await Promise.all(section.cards.map(async (card) => ({
+    ...card,
+    questionHtml: await renderInlineMarkdown(card.question),
+    answerHtml: await renderMarkdown(card.answer),
+  }))),
+})));
+
+function formatCardCount(count: number) {
+  return `${count} card${count === 1 ? '' : 's'}`;
+}
+---
+
+<Layout
+  title={`${entry.data.title} Flashcards`}
+  description={entry.data.description || `${formatCardCount(deck.cardCount)} for ${entry.data.title}`}
+>
+  <article class="flashcard-deck" data-pagefind-body>
+    <header class="flashcard-deck-header">
+      <div class="flashcard-meta">
+        <FormattedDate date={entry.data.date} />
+        <span class="flashcard-meta-separator" aria-hidden="true">·</span>
+        <span>{formatCardCount(deck.cardCount)}</span>
+        {deckTags.length > 0 && (
+          <>
+            <span class="flashcard-meta-separator" aria-hidden="true">·</span>
+            <span>{deckTags.join(', ')}</span>
+          </>
+        )}
+      </div>
+
+      <h1 data-pagefind-meta="title">{entry.data.title}</h1>
+
+      {entry.data.description && <p>{entry.data.description}</p>}
+
+      {entry.data.sourceUrl && (
+        <p class="source-link">
+          <a href={entry.data.sourceUrl}>
+            {entry.data.sourceTitle || 'Source'}
+          </a>
+        </p>
+      )}
+    </header>
+
+    {renderedSections.length === 0 ? (
+      <p>No cards found in this deck.</p>
+    ) : (
+      renderedSections.map((section) => (
+        <section class="flashcard-section" aria-labelledby={section.id}>
+          <div class="flashcard-section-heading">
+            <h2 id={section.id}>
+              {section.title}
+              <span class="flashcard-section-count">{formatCardCount(section.cards.length)}</span>
+            </h2>
+            <button type="button" data-flashcard-toggle>Expand all</button>
+          </div>
+
+          <ol class="flashcard-list">
+            {section.cards.map((card, index) => (
+              <li>
+                <details class="flashcard-item" id={card.id}>
+                  <summary>
+                    <span class="flashcard-caret" aria-hidden="true">&gt;</span>
+                    <span class="flashcard-number">{String(index + 1).padStart(2, '0')}</span>
+                    <span class="flashcard-question" set:html={card.questionHtml} />
+                  </summary>
+                  <div class="flashcard-answer" set:html={card.answerHtml} />
+                </details>
+              </li>
+            ))}
+          </ol>
+        </section>
+      ))
+    )}
+  </article>
+</Layout>
+
+<script>
+  document.querySelectorAll('[data-flashcard-toggle]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const section = button.closest('.flashcard-section');
+      if (!section) return;
+
+      const cards = Array.from(section.querySelectorAll('details'));
+      const shouldOpen = cards.some((card) => !card.open);
+      cards.forEach((card) => {
+        card.open = shouldOpen;
+      });
+      button.textContent = shouldOpen ? 'Collapse all' : 'Expand all';
+    });
+  });
+
+  const hashTarget = window.location.hash && document.getElementById(window.location.hash.slice(1));
+  if (hashTarget instanceof HTMLDetailsElement) {
+    hashTarget.open = true;
+    hashTarget.scrollIntoView({ block: 'start' });
+  }
+</script>

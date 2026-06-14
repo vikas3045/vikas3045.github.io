@@ -11,11 +11,15 @@
     "deploy": "npm run build && gh-pages -d dist -t"
   },
   "dependencies": {
+    "@astrojs/markdown-remark": "6.3.11",
     "@astrojs/rss": "^4.0.14",
     "@astrojs/sitemap": "^3.6.1",
     "astro": "^5.16.4",
     "astro-pagefind": "^1.8.5",
-    "pagefind": "^1.4.0"
+    "katex": "^0.16.47",
+    "pagefind": "^1.4.0",
+    "rehype-katex": "^7.0.1",
+    "remark-math": "^6.0.0"
   },
   "devDependencies": {
     "gh-pages": "^6.3.0"

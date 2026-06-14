@@ -1,0 +1,44 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import { getDeckSlug, parseFlashcards } from '../../utils/flashcards';
+
+const deckEntries = (await getCollection('flashcards'))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const decks = deckEntries.map((entry) => {
+  const parsed = parseFlashcards(entry.body);
+  return {
+    entry,
+    slug: getDeckSlug(entry.id || entry.slug),
+    cardCount: parsed.cardCount,
+  };
+});
+
+function formatCardCount(count: number) {
+  return `${count} card${count === 1 ? '' : 's'}`;
+}
+---
+
+<Layout title="Flashcards" description="Review decks from posts and notes">
+  <section class="flashcards-index" data-pagefind-body>
+    <h1 data-pagefind-meta="title">Flashcards</h1>
+
+    {decks.length === 0 ? (
+      <p>No decks published yet.</p>
+    ) : (
+      <ul class="item-groups flashcard-index-list">
+        {decks.map(({ entry, slug, cardCount }) => (
+          <li>
+            <FormattedDate date={entry.data.date} />
+            <a href={`/flashcards/${slug}/`}>
+              <span class="title">{entry.data.title}</span>
+            </a>
+            <span class="flashcard-count">{formatCardCount(cardCount)}</span>
+          </li>
+        ))}
+      </ul>
+    )}
+  </section>
+</Layout>
