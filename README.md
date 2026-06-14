@@ -109,25 +109,55 @@ Important details:
 
 Flashcards use the same GitHub Issue workflow as blog posts.
 
-To create a new deck:
+Use this workflow when drafting a deck manually or when asking a coding agent to prepare Markdown that you will paste into a GitHub Issue.
+
+### Create a new deck
 
 1. Open a GitHub Issue.
-2. Use the issue title as the deck title.
-3. Write cards in the issue body. Use `##` for sections and `###` for questions. The answer is the Markdown content after each question.
+2. Use the issue title as the deck title. For example, `Activation Functions`.
+3. Write the cards directly in the issue body. Do not include YAML frontmatter.
 4. Add the `flashcards` label.
 5. Add topic labels before publishing. Every label except `publish` and `flashcards` becomes a deck tag.
 6. Add the `publish` label last.
 
-To append cards to an existing deck, add a `Deck:` directive to the issue body:
+New deck issue body template:
+
+```md
+## Section title
+
+### Question?
+
+Answer in Markdown.
+
+### Question with inline math, e.g. what is $\sigma(x)$?
+
+Use inline math with `$...$` and display math with `$$...$$`.
+
+$$
+\sigma(x)=\frac{1}{1+e^{-x}}
+$$
+```
+
+### Append to an existing deck
+
+To append cards to an existing deck, add a `Deck:` directive near the top of the issue body. The slug must match the existing URL path under `/flashcards/<slug>/`.
+
+Append issue body template:
 
 ```md
 Deck: activation-functions
 
 ## Softmax
 
-### What does softmax do?
+### What does temperature do in softmax?
 
-It turns logits into a probability distribution by exponentiating and normalizing them.
+Lower temperature sharpens the distribution. Higher temperature smooths it.
+
+## GELU
+
+### Why is GELU smooth?
+
+GELU uses the normal CDF as a soft gate instead of hard-clipping negative inputs.
 ```
 
 Append behavior:
@@ -138,6 +168,58 @@ Append behavior:
 - Duplicate incoming questions are rejected.
 - Questions already present in the target deck are rejected.
 - Editing or deleting existing cards is intentionally manual for now.
+
+### Flashcard format
+
+- Use `##` only for deck sections.
+- Use `###` only for card questions.
+- The answer is everything after a question until the next `###` question or `##` section.
+- Do not include frontmatter in GitHub Issue bodies. The workflow generates `title`, `date`, `description`, and `tags`.
+- Keep questions unique within the issue and within the target deck.
+- If an answer needs literal `##` or `###` text, put it inside a fenced code block.
+- If an answer needs subheadings, prefer `####` headings, paragraphs, lists, or bold text.
+
+### Presentation capabilities
+
+- Questions support inline Markdown and inline LaTeX math with `$...$`.
+- Answers support normal Markdown: paragraphs, emphasis, links, lists, nested lists, tables, blockquotes, and fenced code.
+- Answers support inline math with `$...$` and display math with `$$...$$`; math is rendered at build time with KaTeX.
+- Images work with normal Markdown image syntax: `![alt text](image-url)`.
+- For issue-published flashcards, GitHub-hosted issue images are downloaded and rewritten to local paths under `public/assets/flashcards/<deck-slug>`.
+- SVGs are best used as image assets, e.g. `![diagram](/assets/flashcards/activation-functions/diagram.svg)`.
+- Raw HTML follows the site's normal Markdown behavior, but committed or ingested assets are easier to review and maintain.
+
+### Coding agent prompt
+
+Use a prompt like this when asking an agent to draft cards for a GitHub Issue:
+
+```md
+Draft a GitHub Issue body for a flashcard deck.
+
+Constraints:
+- Do not include YAML frontmatter.
+- Use `##` for sections and `###` for questions.
+- Keep questions unique and concise.
+- Put each answer directly below its question.
+- Use Markdown lists/tables/code fences where useful.
+- Use `$...$` for inline math and `$$...$$` for display math.
+- Do not use `##` or `###` inside answers unless inside a fenced code block.
+
+Deck topic:
+<topic>
+
+Desired sections:
+<sections>
+
+Desired number of cards:
+<count>
+```
+
+If appending to an existing deck, add this as the first line of the generated issue body:
+
+```md
+Deck: existing-deck-slug
+```
 
 ## Automation
 
