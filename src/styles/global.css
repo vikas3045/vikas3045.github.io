@@ -245,17 +245,23 @@ ul.item-groups,
   margin-bottom: 0.5rem;
 }
 
+.flashcards-index,
 .flashcard-deck {
+  --flashcard-muted-color: #666;
   --flashcard-rule-color: #ddd;
 }
 
 @media (prefers-color-scheme: dark) {
+  .flashcards-index,
   .flashcard-deck {
+    --flashcard-muted-color: #a9bbc1;
     --flashcard-rule-color: #31515a;
   }
 }
 
+body.dark-mode .flashcards-index,
 body.dark-mode .flashcard-deck {
+  --flashcard-muted-color: #a9bbc1;
   --flashcard-rule-color: #31515a;
 }
 
@@ -277,12 +283,18 @@ body.dark-mode .flashcard-deck {
   font-size: 0.88rem;
 }
 
+.flashcard-meta-value,
+.flashcard-meta-tags {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
 .flashcard-meta-separator {
-  color: var(--blockquote-color);
+  color: var(--flashcard-muted-color);
 }
 
 .flashcard-count {
-  color: var(--text-color);
+  color: var(--flashcard-muted-color);
   font-size: 0.9rem;
   margin-left: auto;
   white-space: nowrap;
@@ -317,7 +329,7 @@ body.dark-mode .flashcard-deck {
 }
 
 .flashcard-section-count {
-  color: var(--text-color);
+  color: var(--flashcard-muted-color);
   font-size: 0.72em;
   font-weight: normal;
   margin-left: 0.6rem;
@@ -355,9 +367,11 @@ body.dark-mode .flashcard-deck {
 }
 
 .flashcard-caret {
-  color: var(--blockquote-color);
+  color: var(--flashcard-muted-color);
+  display: inline-block;
   flex: 0 0 1ch;
   font-family: monospace;
+  text-align: center;
   transform-origin: center;
   transition: transform 0.15s ease;
 }
@@ -367,10 +381,15 @@ body.dark-mode .flashcard-deck {
 }
 
 .flashcard-number {
-  color: var(--blockquote-color);
+  color: var(--flashcard-muted-color);
   flex: 0 0 2.2rem;
   font-family: monospace;
   font-size: 0.83rem;
+}
+
+.flashcard-item summary:hover .flashcard-caret,
+.flashcard-item summary:hover .flashcard-number {
+  color: var(--text-color);
 }
 
 .flashcard-question {
@@ -413,6 +432,22 @@ body.dark-mode .flashcard-deck {
 
 .flashcard-answer > :last-child {
   margin-bottom: 0;
+}
+
+@media (max-width: 520px) {
+  .flashcard-tags-separator {
+    display: none;
+  }
+
+  .flashcard-meta-tags {
+    flex-basis: 100%;
+  }
+
+  .flashcard-section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
 }
 
 /* draft-preview styles */
