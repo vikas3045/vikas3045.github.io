@@ -44,11 +44,11 @@ function formatCardCount(count: number) {
       <div class="flashcard-meta">
         <FormattedDate date={entry.data.date} />
         <span class="flashcard-meta-separator" aria-hidden="true">·</span>
-        <span>{formatCardCount(deck.cardCount)}</span>
+        <span class="flashcard-meta-value">{formatCardCount(deck.cardCount)}</span>
         {deckTags.length > 0 && (
           <>
-            <span class="flashcard-meta-separator" aria-hidden="true">·</span>
-            <span>{deckTags.join(', ')}</span>
+            <span class="flashcard-meta-separator flashcard-tags-separator" aria-hidden="true">·</span>
+            <span class="flashcard-meta-tags">{deckTags.join(', ')}</span>
           </>
         )}
       </div>
