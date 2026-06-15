@@ -133,7 +133,7 @@ There is no universally best activation. The right question is: what behavior do
 | Sigmoid | Logistic sigmoid | $\sigma(x)=\frac{1}{1+e^{-x}}$ | `(0, 1)` |
 | Tanh | Hyperbolic tangent | $\tanh(x)$ | `(-1, 1)` |
 | ReLU | Rectified Linear Unit | $\max(0,x)$ | `[0, infinity)` |
-| Leaky ReLU | Leaky Rectified Linear Unit | $x$ if $x>0$, else $\alpha x$ | `(-infinity, infinity)` |
+| Leaky ReLU | Leaky Rectified Linear Unit | $x$ if $x>0$, else $\alpha x$ | `(-infinity, infinity)` (attenuated negative) |
 | Softplus | Smooth ReLU-like function | $\log(1+e^x)$ | `(0, infinity)` |
 | SiLU | Sigmoid Linear Unit | $x\sigma(x)$ | roughly `(-0.28, infinity)` |
 | GELU | Gaussian Error Linear Unit | $x\Phi(x)$ | roughly `(-0.17, infinity)` |
@@ -184,7 +184,7 @@ Use it when bounded, symmetric output is useful, such as some recurrent states o
     <path d="M320 24V224"></path>
   </g>
   <path d="M56,124L68,124L80,124L92,123L104,123L116,123L128,123L140,123L152,122L164,121L176,121L188,120L200,118L212,117L224,115L236,112L248,109L260,105L272,101L284,96L296,91L308,85L320,79L332,72L344,66L356,61L368,56L380,52L392,48L404,45L416,42L428,40L440,39L452,37L464,36L476,36L488,35L500,35L512,34L524,34L536,34L548,34L560,33L572,33L584,33" fill="none" stroke="#3273dc" stroke-width="2.5"></path>
-  <path d="M56,215L68,215L80,215L92,215L104,215L116,215L128,215L140,215L152,215L164,215L176,215L188,214L200,214L212,214L224,213L236,211L248,208L260,204L272,196L284,185L296,169L308,148L320,124L332,100L344,79L356,63L368,52L380,44L392,40L404,37L416,35L428,34L440,34L452,34L464,33L476,33L488,33L500,33L512,33L524,33L536,33L548,33L560,33L572,33L584,33" fill="none" stroke="#8b6fcb" stroke-width="2.5"></path>
+  <path d="M56,215L68,215L80,215L92,215L104,215L116,215L128,215L140,215L152,215L164,215L176,215L188,214L200,214L212,214L224,213L236,211L248,208L260,204L272,196L284,185L296,169L308,148L320,124L332,100L344,79L356,63L368,52L380,44L392,40L404,37L416,35L428,34L440,34L452,34L464,33L476,33L488,33L500,33 Bell,33 L512,33L524,33L536,33L548,33L560,33L572,33L584,33" fill="none" stroke="#8b6fcb" stroke-width="2.5"></path>
   <g font-family="Verdana, sans-serif" font-size="13">
     <text x="478" y="53" fill="#3273dc">sigmoid</text>
     <text x="430" y="82" fill="#8b6fcb">tanh</text>
@@ -206,34 +206,20 @@ That makes it cheap and good for gradient flow on the positive side.
 
 Its weakness is that negative signal is killed completely, which can cause dead neurons.
 
-### How does ReLU die?
+### How does ReLU die, and how do we fix it?
 
-A ReLU unit can die when it outputs zero for almost all inputs.
+A ReLU unit "dies" when an aggressive gradient update (often due to a high learning rate) shifts its weights such that the pre-activation $z$ is negative across the *entire* training dataset. 
 
-If the pre-activation is always negative:
+Because $\operatorname{ReLU}'(x) = 0$ for all negative values, the gradient becomes zero, locking the weights permanently.
 
-$$
-\operatorname{ReLU}(x)=0
-$$
+**Alternative Smooth & Leaky Cutoffs:**
 
-and the gradient is also zero.
-
-The unit may stop learning.
-
-This is why variants like Leaky ReLU, PReLU, ELU, GELU, and SiLU preserve some negative-side signal.
-
-### What fixes ReLU's harsh cutoff?
-
-| Activation | Full form | Core idea |
-| --- | --- | --- |
-| Leaky ReLU | Leaky Rectified Linear Unit | Keep a small fixed negative slope |
-| PReLU | Parametric Rectified Linear Unit | Learn the negative slope |
-| ELU | Exponential Linear Unit | Smoothly map negatives toward `-\alpha` |
-| SELU | Scaled Exponential Linear Unit | ELU-like activation for self-normalizing networks |
-
-Use these when plain ReLU is too harsh, especially if dead neurons or negative-signal loss seem problematic.
-
-SELU is special: it expects conditions like LeCun normal initialization and alpha dropout.
+| Activation | Core idea |
+| --- | --- |
+| **Leaky ReLU** | Leaky Rectified Linear Unit - Keep a small fixed negative slope (e.g., $\alpha = 0.01$) to guarantee gradient backprop. |
+| **PReLU** | Parametric Rectified Linear Unit -Treat the negative slope $\alpha$ as a learnable parameter. |
+| **ELU** | Exponential Linear Unit -Smoothly map negatives toward $-\alpha$ using exponentials to reduce noise susceptibility. |
+| **SELU** | Scaled Exponential Linear Unit - Self-normalizing variant of ELU; requires LeCun initialization and alpha dropout. |
 
 <svg viewBox="0 0 640 250" role="img" aria-labelledby="relu-family-title" style="max-width:100%;height:auto;color:var(--text-color);">
   <title id="relu-family-title">ReLU, Leaky ReLU, and Softplus curves</title>
@@ -259,11 +245,9 @@ $$
 \operatorname{Softplus}(x)=\log(1+e^x)
 $$
 
-For large positive inputs, it behaves like `x`.
+For large positive inputs, it behaves like `x`. For large negative inputs, it approaches `0`.
 
-For large negative inputs, it approaches `0`.
-
-It is useful when you need a smooth positive output, such as variance, rate, scale, or another positive parameter.
+It is useful when you need a completely smooth positive output, such as predicting variance, learning rates, scales, or physical parameters in Bayesian neural networks.
 
 ### SiLU / Swish: what matters?
 
@@ -273,15 +257,15 @@ $$
 \operatorname{SiLU}(x)=x\sigma(x)
 $$
 
-Swish is:
+Swish is the generalized form:
 
 $$
 \operatorname{Swish}(x)=x\sigma(\beta x)
 $$
 
-When `beta = 1`, Swish is SiLU.
+When `beta = 1`, Swish is identical to SiLU.
 
-The intuition: SiLU softly gates the input by its own sigmoid. It keeps large positive values, smoothly downweights negatives, and preserves some small negative signal.
+The intuition: SiLU softly gates the input by its own sigmoid. It keeps large positive values, smoothly downweights negatives, and preserves some small negative signal to support gradient flow near zero.
 
 ### GELU: what matters?
 
@@ -291,11 +275,9 @@ $$
 \operatorname{GELU}(x)=x\Phi(x)
 $$
 
-Where `Phi(x)` is the standard normal CDF.
+Where `Phi(x)` is the standard normal cumulative distribution function (CDF).
 
-GELU is like a smooth, probabilistic ReLU: instead of hard-clipping negatives, it softly gates values based on magnitude.
-
-It is common in transformer MLP blocks.
+GELU is like a smooth, probabilistic ReLU: instead of hard-clipping negatives based on sign, it softly gates values based on their value magnitude relative to a normal distribution. It is the gold standard default in Transformer MLP blocks.
 
 ### GELU approximation: why know it?
 
@@ -305,15 +287,13 @@ $$
 \operatorname{GELU}(x) \approx 0.5x\left(1+\tanh\left(\sqrt{\frac{2}{\pi}}(x+0.044715x^3)\right)\right)
 $$
 
-This avoids computing the exact normal CDF.
-
-You do not usually need to implement this by hand, but recognizing it helps when reading model code.
+This avoids computing the exact, computationally heavy normal CDF. You rarely implement this manually, but recognizing this formula prevents confusion when analyzing raw model source code.
 
 ## Softmax and Outputs
 
 ### Softmax: what is it?
 
-Softmax turns a vector of logits into a probability distribution.
+Softmax turns a vector of logits into a valid probability distribution.
 
 $$
 \operatorname{softmax}(z_i)=\frac{e^{z_i}}{\sum_j e^{z_j}}
@@ -321,28 +301,36 @@ $$
 
 Each output is positive, and all outputs sum to `1`.
 
-Unlike sigmoid or ReLU, softmax is not elementwise. Each output depends on every logit.
+Unlike sigmoid or ReLU, softmax is **not elementwise**. Each output score scales relative to every other logit in the vector.
 
 ### Softmax: what's the intuition?
 
 Softmax makes classes compete.
 
-Increasing one logit increases that class probability and lowers the relative probability of other classes.
+Increasing one logit exponentially increases that class probability while crushing the relative probability of all other classes.
 
-Use softmax when exactly one class should be correct.
-
-Examples:
-
+Use softmax when **exactly one** class can be correct.
 - Digit classification
-- Single-label image classification
-- Next-token prediction
-- Mutually exclusive classes
+- Single-label classification
+- Next-token prediction in LLMs
+- Mutually exclusive categories
+
+### What is Softmax Temperature Scaling?
+
+Temperature scaling ($T$) shifts output distributions without altering classification rank.
+
+$$
+\operatorname{softmax}(z_i) = \frac{e^{z_i / T}}{\sum_j e^{z_j / T}}
+$$
+
+- **$T \to 0$ (Low Temp):** Amplifies differences; the largest logit dominates completely. Distribution approaches a hard `argmax` (highly deterministic).
+- **$T > 1$ (High Temp):** Diminishes differences; flattens the distribution towards uniform probability (increases randomness/entropy in generation).
 
 ### Why max-shift softmax?
 
-Exponentials can overflow for large logits.
+Exponentials cause extreme numerical overflow for large logits during computing.
 
-Use:
+Instead, production engines use:
 
 $$
 \operatorname{softmax}(z_i)=\frac{e^{z_i-m}}{\sum_j e^{z_j-m}}
@@ -354,13 +342,11 @@ $$
 m=\max_j z_j
 $$
 
-Subtracting the same constant from every logit does not change the probabilities, but it prevents very large exponentials.
+Subtracting the maximum constant value shifts the largest exponent to $e^0 = 1$, perfectly preserving mathematical probabilities while guaranteeing mathematical stability.
 
 ### Sigmoid or softmax?
 
-Use sigmoid when outputs are independent.
-
-Use softmax when outputs compete.
+Use sigmoid when outputs are independent. Use softmax when outputs compete.
 
 | Situation | Activation |
 | --- | --- |
@@ -388,76 +374,51 @@ Hidden layers can still use ReLU, GELU, SiLU, or another hidden activation.
 
 ### Output logits or probabilities?
 
-Many libraries combine the output activation and loss for numerical stability.
+Many standard frameworks combine the activation and cross-entropy loss into single integrated routines for extreme numerical precision.
+- `Binary Cross-Entropy with Logits` combines sigmoid and BCE.
+- `Cross Entropy Loss` combines softmax and Negative Log Likelihood.
 
-Examples:
-
-- Binary cross-entropy with logits combines sigmoid and binary cross-entropy.
-- Cross-entropy loss for multi-class classification often combines softmax and negative log likelihood.
-
-This avoids unstable computations like taking `log` of probabilities that are extremely close to `0`.
-
-Practical rule: check whether the loss expects raw logits or already-activated probabilities. Passing both can silently hurt training.
+This prevents taking the `log` of absolute zeros. Always verify if your loss function demands raw logits or activated values. Mixing them up breaks model learning silently.
 
 ## Modern Architecture Choices
 
 ### GLU: what is the idea?
 
-GLU stands for Gated Linear Unit.
-
-A GLU splits a projection into two parts: values and gates.
-
-One common form is:
+GLU stands for Gated Linear Unit. A GLU splits a linear layer projection into two parallel paths: a values path and a control gate path.
 
 $$
-\operatorname{GLU}(x)=a \otimes \sigma(b)
+\operatorname{GLU}(x) = a \otimes \sigma(b)
 $$
 
-Where `a` and `b` are learned projections, and `\otimes` means elementwise multiplication.
-
-The model learns what information to pass through.
+Where `a` and `b` are separate linear projections ($a = xW, b = xV$) and `\otimes` denotes elementwise multiplication. The model leverages the sigmoid path to explicitly filter information flow.
 
 ### SwiGLU: why care?
 
-SwiGLU is a gated activation that uses a Swish or SiLU-style gate.
-
-A simplified form is:
+SwiGLU is a modern gated activation variant that replaces the basic sigmoid gate with a Swish/SiLU gate. In production Transformers (like LLaMA), it completely swaps out the classic FFN layer using three distinct weight matrices ($W, V, W_2$):
 
 $$
-\operatorname{SwiGLU}(x)=a \otimes \operatorname{SiLU}(b)
+\operatorname{SwiGLU}(x) = (\operatorname{SiLU}(xW) \otimes xV)W_2
 $$
 
-It is common in modern transformer feedforward blocks.
+It maps the hidden dimension to an up-sampled gate path ($\operatorname{SiLU}(xW)$) and value path ($xV$), combines them elementwise, and projects back down via $W_2$.
 
-For basics, learn ReLU, sigmoid, tanh, softmax, GELU, and SiLU first. Then treat GLU and SwiGLU as architecture refinements.
+### What is the training memory overhead of smooth activations?
+
+Smooth activations (GELU, SiLU) incur significantly higher **activation memory footprints** during training than ReLU.
+
+- **ReLU:** Requires storing only a single bit per activation for the backward pass (identifying if $x > 0$).
+- **GELU/SiLU:** Require saving continuous, full-precision floating-point values of their inputs to calculate complex local derivatives during backpropagation. This trade-off requires advanced memory management like kernel fusions or activation checkpointing at scale.
 
 ### What's a sane hidden-layer default?
 
-Practical defaults:
-
-| Architecture / use case | Good default |
-| --- | --- |
-| Simple MLP | ReLU or GELU |
-| CNN | ReLU, Leaky ReLU, or SiLU |
-| Transformer | GELU, SiLU, or SwiGLU |
-| Recurrent gates | Sigmoid and tanh |
-| Positive scalar output | Softplus |
-
-When in doubt, start with the activation used by the architecture you are implementing.
-
-### ReLU, GELU, or SiLU?
-
-Use ReLU when you want a fast, simple baseline.
-
-Use GELU when you are working with transformer-style architectures or want smooth probabilistic gating.
-
-Use SiLU when you want a smooth ReLU-like activation that preserves small negative signal.
-
-| Activation | Main benefit | Main drawback |
+| Architecture / Use Case | Recommended Default | Trade-offs to Consider |
 | --- | --- | --- |
-| ReLU | Fast and simple | Can kill negative signal |
-| GELU | Smooth and transformer-friendly | More expensive than ReLU |
-| SiLU | Smooth and preserves small negative signal | More expensive than ReLU |
+| **Simple MLP** | ReLU | Fast, compute-efficient, ultra-low memory overhead. Risk of dead neurons. |
+| **CNN** | ReLU, Leaky ReLU, or SiLU | SiLU assists edge detail retention but demands higher VRAM buffers. |
+| **Transformer** | GELU, SiLU, or SwiGLU | Smooth gradients maximize attention optimization. Expensive compute. |
+| **Recurrent Gates** | Sigmoid & Tanh | Explicitly required for stable state limits. |
+
+When implementing complex networks, prioritize the default activation used by the baseline architecture.
 
 <svg viewBox="0 0 640 250" role="img" aria-labelledby="modern-activations-title" style="max-width:100%;height:auto;color:var(--text-color);">
   <title id="modern-activations-title">ReLU, GELU, and SiLU curves</title>
@@ -475,31 +436,81 @@ Use SiLU when you want a smooth ReLU-like activation that preserves small negati
   </g>
 </svg>
 
-### What's the common beginner trap?
-
-The biggest beginner mistake is choosing activations only by habit.
-
-Ask:
-
-- What should the output mean?
-- Are labels mutually exclusive or independent?
-- Does the loss expect logits or probabilities?
-- Does the activation saturate?
-- Does it preserve useful gradients?
-- Does the architecture expect a specific activation?
-
-Output activations define prediction meaning. Hidden activations shape optimization.
-
 ### What's the takeaway?
 
 Remember:
-
 - Activations add non-linearity.
-- Hidden activations shape learning dynamics.
-- Output activations shape prediction meaning.
-- Saturating activations can vanish gradients.
-- ReLU is simple and strong.
-- GELU and SiLU are smooth modern defaults.
-- Sigmoid is for probabilities and gates.
-- Softmax is for competing classes.
-- There is no universally best activation.
+- Hidden activations shape learning dynamics; output activations shape prediction meaning.
+- Saturating activations vanish gradients; dead ReLUs are caused by absolute mathematical lock out.
+- ReLU is ultra-fast; GELU and SiLU are smooth, high-performing, memory-intensive defaults.
+- Sigmoid scales independent features/probabilities; Softmax governs strict competition.
+
+## PyTorch Implementation Details
+
+### Module (`nn`) vs. Functional (`F`) activations?
+
+PyTorch provides two ways to call activation functions: **Stateful Modules** (`torch.nn`) and **Stateless Functional calls** (`torch.nn.functional`).
+
+| Approach | Code Example | When to use |
+| --- | --- | --- |
+| **Module (`nn`)** | `model = nn.Sequential(nn.Linear(10, 5), nn.ReLU())` | Inside `nn.Sequential` containers or when defining network layers in `__init__`. |
+| **Functional (`F`)** | `x = F.relu(self.fc(x))` | Inside the `forward` pass of an `nn.Module` for cleaner, stateless code. |
+
+Under the hood, `nn.ReLU` simply calls `F.relu` during its forward pass.
+
+### What is the `inplace=True` flag in PyTorch?
+
+Some activations (like `nn.ReLU` or `nn.LeakyReLU`) accept an `inplace` argument.
+
+```python
+# Modifies the input tensor directly without allocating new memory
+nn.ReLU(inplace=True) 
+```
+
+- **Pros:** Saves VRAM by overwriting intermediate activation tensors instead of allocating fresh buffers.
+- **Cons:** Destroys the original input tensor. If that input is needed elsewhere (like in a residual connection `x + conv(x)`), it will trigger a runtime error during backpropagation.
+
+### How do you implement SwiGLU in PyTorch?
+
+Because PyTorch does not have a native single-class `nn.SwiGLU`, you build it by combining `F.silu` with linear projections.
+
+```python
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+class SwiGLU(nn.Module):
+    def __init__(self, d_model, d_ff):
+        super().__init__()
+        self.w = nn.Linear(d_model, d_ff) # Gate path
+        self.v = nn.Linear(d_model, d_ff) # Value path
+
+    def forward(self, x):
+        # Element-wise multiplication of the gated SiLU and the value projection
+        return F.silu(self.w(x)) * self.v(x)
+```
+
+### Why use `nn.LogSoftmax` instead of `nn.Softmax`?
+
+While `nn.Softmax` outputs clean probabilities, calculating probabilities explicitly can cause log-underflow issues when passing them to a loss function.
+
+`nn.LogSoftmax` computes the logarithm of the softmax mathematically inside a single, fused step:
+
+```python
+# Highly stable alternative to torch.log(F.softmax(x, dim=-1))
+output = F.log_softmax(x, dim=-1)
+```
+
+Pairing raw logits with `nn.CrossEntropyLoss` is usually preferred because it applies this logarithmic optimization under the hood automatically.
+
+### What does the `dim` parameter in PyTorch Softmax mean?
+
+The `dim` (dimension) parameter specifies the axis along which the probabilities must sum to 1.
+
+```python
+# For a batch of token logits: [batch_size, sequence_length, vocab_size]
+output = F.softmax(logits, dim=-1)
+```
+
+- `dim=-1` (or `dim=2` in this case) ensures the competition happens across the *vocabulary word choices*, making sure the tokens sum to 1.
+- Choosing the wrong dimension (like `dim=0`) will accidentally force competition across different *batches*, entirely breaking the model's logic.
